@@ -14,7 +14,8 @@ export interface Config {
     users: User;
     media: Media;
     Especialidades: Especialidade;
-    Doctor: Doctor;
+    doctor: Doctor;
+    pacientes: Paciente;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -24,7 +25,8 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     Especialidades: EspecialidadesSelect<false> | EspecialidadesSelect<true>;
-    Doctor: DoctorSelect<false> | DoctorSelect<true>;
+    doctor: DoctorSelect<false> | DoctorSelect<true>;
+    pacientes: PacientesSelect<false> | PacientesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -109,7 +111,7 @@ export interface Especialidade {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Doctor".
+ * via the `definition` "doctor".
  */
 export interface Doctor {
   id: string;
@@ -140,6 +142,23 @@ export interface Doctor {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pacientes".
+ */
+export interface Paciente {
+  id: string;
+  nombre: string;
+  apellido: string;
+  identidadPersonal: string;
+  fechaNacimiento: string;
+  direccion?: string | null;
+  telefono: string;
+  correo: string;
+  contraseña: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -158,8 +177,12 @@ export interface PayloadLockedDocument {
         value: string | Especialidade;
       } | null)
     | ({
-        relationTo: 'Doctor';
+        relationTo: 'doctor';
         value: string | Doctor;
+      } | null)
+    | ({
+        relationTo: 'pacientes';
+        value: string | Paciente;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -247,7 +270,7 @@ export interface EspecialidadesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Doctor_select".
+ * via the `definition` "doctor_select".
  */
 export interface DoctorSelect<T extends boolean = true> {
   nombreDoctor?: T;
@@ -264,6 +287,22 @@ export interface DoctorSelect<T extends boolean = true> {
   ubicacion?: T;
   costo?: T;
   descripcion?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pacientes_select".
+ */
+export interface PacientesSelect<T extends boolean = true> {
+  nombre?: T;
+  apellido?: T;
+  identidadPersonal?: T;
+  fechaNacimiento?: T;
+  direccion?: T;
+  telefono?: T;
+  correo?: T;
+  contraseña?: T;
   updatedAt?: T;
   createdAt?: T;
 }

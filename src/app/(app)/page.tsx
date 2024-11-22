@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/app/(app)/components/ui/card";
 
 import {
@@ -13,8 +12,20 @@ import CarouselEspecialidades from "@/app/(app)/components/carouselEspecialidade
 import Header from "@/app/(app)/components/header";
 import DesktopNavigation from "@/app/(app)/components/desktopNavigation";
 import MobileNavigation from "@/app/(app)/components/mobileNavigation";
+import { GET } from "../my-route/route";
+import { getPayloadHMR } from '@payloadcms/next/utilities'
+import configPromise from '@payload-config'
 
-const Home = () => {
+
+
+export default async function Home() {
+  const payload = await getPayloadHMR({ config: configPromise })
+  const data = await payload.find({
+    collection: 'doctor',
+    
+  })
+
+
   return (
     <div className="p-4 lg:pl-16 lg:pr-16 flex flex-col gap-4">
       <Header />
@@ -81,5 +92,3 @@ function CarouselMedicosDestacados() {
     </div>
   );
 }
-
-export default Home;

@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
 export const Doctores: CollectionConfig = {
-    slug: 'Doctor',
+    slug: 'doctor',
     admin: {
         useAsTitle: 'nombreDoctor',
     },
