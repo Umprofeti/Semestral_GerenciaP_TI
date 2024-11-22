@@ -1,0 +1,15 @@
+.superior-box {
+  border-radius: 0% 0% 100% 100% / 0% 0% 330% 330%;
+}
+
+/* Antes de la barra /: Valores horizontales de las esquinas en orden (superior izquierda, superior derecha, inferior derecha, inferior izquierda).
+Después de la barra /: Valores verticales de las esquinas en el mismo orden. */
+
+@media screen and (min-width: 1024px) {
+  .superior-box {
+    border-radius:  0% 0%
+                    100% 0% / 
+                    0% 0% 
+                    100% 0%;
+  }
+}

@@ -1,0 +1,43 @@
+import React from "react";
+import "./login.css";
+import "../crearCuenta/crearCuenta.css";
+import Logo from "../public/doctor.svg";
+import Image from "next/image";
+
+const Login = () => {
+  return (
+    <div className="lg:justify-space-between flex h-screen flex-col items-center justify-around lg:flex-row">
+      <div className="superior-box absolute top-0 h-20 w-full bg-[#89ccc5] lg:absolute lg:left-0 lg:top-0 lg:h-40 lg:w-40"></div>
+
+      <Image src={Logo} alt="Logo" width={250} height={250} className="mt-10" />
+
+      <form className="flex flex-col items-center">
+        <h1 className="hidden text-3xl font-semibold lg:block">
+          Iniciar <span className="text-sky-300">Sesión</span>
+        </h1>
+        <div className="input-with-placeholder">
+          <input required type="email" id="email" />
+          <label htmlFor="email"> Correo Electronico</label>
+        </div>
+
+        <div className="input-with-placeholder">
+          <input required type="password" id="password" />
+          <label htmlFor="password"> Contraseña</label>
+        </div>
+
+        <button className="mt-6 rounded-xl bg-sky-300 px-8 py-2 text-lg text-white">
+          Iniciar Sesión
+        </button>
+
+        <p className="text-sm text-gray-500">¿Olvidaste tu contraseña?</p>
+
+        <button className="mt-5 rounded-xl bg-sky-300 px-8 py-2 text-lg text-white">
+          Crear Cuenta
+        </button>
+      </form>
+      <div className="inferior-box absolute bottom-0 right-0 hidden h-20 w-20 bg-sky-200 lg:block" />
+    </div>
+  );
+};
+
+export default Login;

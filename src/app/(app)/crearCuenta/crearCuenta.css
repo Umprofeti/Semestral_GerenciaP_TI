@@ -1,0 +1,61 @@
+.input-with-placeholder {
+  width: 350px;
+  position: relative;
+  margin: 20px 0px 0px 0px;
+  background-color: blue;
+}
+
+.input-with-placeholder label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  transition: 300ms all;
+}
+
+.input-with-placeholder input {
+  width: 100%;
+  height: 40px;
+  padding: 0 15px;
+  background: #f8fafc;
+  border-bottom: solid 1px rgb(181, 181, 181);
+}
+
+.input-with-placeholder input:focus {
+  outline: none;
+}
+
+.input-with-placeholder input:focus + label,
+.input-with-placeholder input:valid + label {
+  height: 50%;
+  padding-left: 0;
+  transform: translateY(-100%);
+  font-size: 12px;
+  color: #777;
+}
+
+#fechaNacimiento2 {
+  height: 50%;
+  padding-left: 0;
+  transform: translateY(-100%);
+  font-size: 12px;
+  color: #777;
+}
+
+@media screen and (min-width: 1024px) {
+  .input-with-placeholder {
+    width: 500px;
+  }
+
+  .superior-box {
+    border-radius: 0% 0% 100% 0% / 0% 0% 100% 0%;
+  }
+
+  .inferior-box {
+    border-radius: 100% 0% 0% 0% / 100% 0% 0% 0%;
+  }
+}
