@@ -1,30 +1,63 @@
-import React from "react";
-import "./login.css";
-import "../crearCuenta/crearCuenta.css";
-import Logo from "../public/doctor.svg";
-import Image from "next/image";
+'use client'
+
+import React from 'react'
+import './login.css'
+import '../crearCuenta/crearCuenta.css'
+import Logo from '../public/doctor.svg'
+import Image from 'next/image'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { Users } from '../../../collections/Users'
+import { Link } from 'next/link'
+
+type Inputs = {
+  email: string
+  password: string
+}
 
 const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>()
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const req = await fetch(`http://localhost:3000/api/pacientes`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      const res = await req.json()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className="lg:justify-space-between flex h-screen flex-col items-center justify-around lg:flex-row">
       <div className="superior-box absolute top-0 h-20 w-full bg-[#89ccc5] lg:absolute lg:left-0 lg:top-0 lg:h-40 lg:w-40"></div>
 
       <Image src={Logo} alt="Logo" width={250} height={250} className="mt-10" />
 
-      <form className="flex flex-col items-center">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center">
         <h1 className="hidden text-3xl font-semibold lg:block">
           Iniciar <span className="text-sky-300">Sesión</span>
         </h1>
         <div className="input-with-placeholder">
-          <input required type="email" id="email" />
+          <input {...register('email', { required: true })} type="email" id="email" />
           <label htmlFor="email"> Correo Electronico</label>
         </div>
 
         <div className="input-with-placeholder">
-          <input required type="password" id="password" />
+          <input {...register('password', { required: true })} type="password" id="password" />
           <label htmlFor="password"> Contraseña</label>
         </div>
-
+        {errors.email && <p className="text-sm text-red-500">El correo electronico es requerido</p>}
+        {errors.password && <p className="text-sm text-red-500">La contraseña es requerida</p>}
         <button className="mt-6 rounded-xl bg-sky-300 px-8 py-2 text-lg text-white">
           Iniciar Sesión
         </button>
@@ -37,7 +70,7 @@ const Login = () => {
       </form>
       <div className="inferior-box absolute bottom-0 right-0 hidden h-20 w-20 bg-sky-200 lg:block" />
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
