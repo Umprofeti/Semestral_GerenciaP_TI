@@ -60,7 +60,7 @@ export default async function Home() {
 }
 
 function CarouselMedicosDestacados({ doctors }: { doctors: any[] }) {
-  const color = "bg-[#cce7e4]"; // El color que quieres para todos
+  const color = "bg-[#cce7e4]";
 
   return (
     <div className="flex justify-center">

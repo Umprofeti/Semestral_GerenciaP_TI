@@ -16,6 +16,7 @@ export interface Config {
     especialidades: Especialidade;
     doctor: Doctor;
     pacientes: Paciente;
+    citas: Cita;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -27,6 +28,7 @@ export interface Config {
     especialidades: EspecialidadesSelect<false> | EspecialidadesSelect<true>;
     doctor: DoctorSelect<false> | DoctorSelect<true>;
     pacientes: PacientesSelect<false> | PacientesSelect<true>;
+    citas: CitasSelect<false> | CitasSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -150,6 +152,18 @@ export interface Paciente {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "citas".
+ */
+export interface Cita {
+  id: string;
+  Doctor: string | Doctor;
+  Paciente: string | Paciente;
+  Completado?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -174,6 +188,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pacientes';
         value: string | Paciente;
+      } | null)
+    | ({
+        relationTo: 'citas';
+        value: string | Cita;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -295,6 +313,17 @@ export interface PacientesSelect<T extends boolean = true> {
   telefono?: T;
   correo?: T;
   contraseña?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "citas_select".
+ */
+export interface CitasSelect<T extends boolean = true> {
+  Doctor?: T;
+  Paciente?: T;
+  Completado?: T;
   updatedAt?: T;
   createdAt?: T;
 }

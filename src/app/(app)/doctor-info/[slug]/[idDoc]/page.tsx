@@ -2,32 +2,20 @@
 import Header from "@/app/(app)/components/header";
 import { Button } from "@/app/(app)/components/ui/button";
 import { Input } from "@/app/(app)/components/ui/input";
-import { Label } from "@/app/(app)/components/ui/label";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/app/(app)/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { cn } from "@/app/(app)/lib/utils";
 import { Calendar } from "@/app/(app)/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/app/(app)/components/ui/popover";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/app/(app)/components/ui/form";
-import DesktopNavigation from "../../components/desktopNavigation";
+import {Popover,PopoverContent,PopoverTrigger,} from "@/app/(app)/components/ui/popover";
+import {Form,FormControl,FormField,FormItem,FormLabel,FormMessage,} from "@/app/(app)/components/ui/form";
+import DesktopNavigation from "../../../components/desktopNavigation";
 import Image from "next/image";
-import { Card, CardHeader } from "../../components/ui/card";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const FormSchema = z.object({
   dob: z.date({ required_error: "Por favor selecciona una fecha válida." }),
@@ -36,10 +24,38 @@ const FormSchema = z.object({
 });
 
 const AddCita = () => {
+
+  const {idDoc} = useParams()
+
+  const [result, setResult] = useState<InformacionDoctoresType>();
+  const [loading, setLoading] =useState(true)
+  const [error, setError] =useState('')
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const req = await fetch(`http://localhost:3000/api/doctor?where[id][equals]=${idDoc}`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await req.json();
+        setResult(data)
+        setLoading(false)
+      } catch (err) {
+        setError(error)
+        setLoading(false)
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
-
   const handleSubmit = (data: z.infer<typeof FormSchema>) => {
     console.log("Datos enviados:", data);
   };
@@ -54,20 +70,24 @@ const AddCita = () => {
         </h1>
         <div className="md:flex md:flex-row-reverse">
           {/* Presentacion del Doctor */}
-          <div className="flex-1 flex justify-center items-center gap-x-6">
-            <div>
-              <div className="text-xl md:text-3xl">Dr. XXXXX</div>
-              <div className="text-lg text-[#3f3c3c] md:text-2xl">Cardiologia</div>
-            </div>
-            <Image
-              src="/doctor.png"
-              alt="Doctor's Picture"
-              width={150}
-              height={150}
-              className="w-36 h-auto md:w-64 md:h-auto"
-              sizes="(max-width: 768px) 150px, (min-width: 768px) 256px"
-            />
-          </div>
+          {result?.docs.map((doctor, index)=>{
+            return(
+              <div key={index} className="flex-1 flex justify-center items-center gap-x-6">
+                <div>
+                  <div className="text-xl md:text-3xl">Dr/a. {doctor.nombreDoctor}</div>
+                  <div className="text-lg text-[#3f3c3c] md:text-2xl">{doctor.especialidad.Nombre}</div>
+                </div>
+                <Image
+                  src={doctor.fotoDoctor.url}
+                  alt={doctor.fotoDoctor.alt}
+                  width={150}
+                  height={150}
+                  className="w-36 h-auto md:w-64 md:h-auto"
+                  sizes="(max-width: 768px) 150px, (min-width: 768px) 256px"
+                />
+              </div>
+            )
+          })}
           {/* Descripcion del Doctor */}
           <div className="flex-1 flex flex-col items-center">
             <Form {...form}>
