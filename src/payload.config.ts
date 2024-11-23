@@ -13,9 +13,27 @@ import { Doctores } from './collections/Doctor'
 import { Pacientes } from './collections/Pacientes'
 import { Citas } from './collections/Citas'
 import { Expedientes } from './collections/Expedientes'
+import {s3Adapter} from '@payloadcms/plugin-cloud-storage/s3'
+import {cloudStoragePlugin  } from '@payloadcms/plugin-cloud-storage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+
+const minioAdapter = s3Adapter({
+  acl: 'private',
+  config:{
+    endpoint: process.env.MINIO_ENDPOINT,
+    credentials:{
+      accessKeyId: process.env.MINIO_ACCESS_KEY,
+      secretAccessKey: process.env.MINIO_SECRET_KEY
+    },
+    forcePathStyle: true,
+    region: process.env.MINIO_REGION,
+  },
+  bucket: process.env.MINIO_BUCKET
+})
+
 
 export default buildConfig({
   admin: {
@@ -35,6 +53,13 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
-    // storage-adapter-placeholder
+    cloudStoragePlugin({
+    collections: {
+      'media':{
+        adapter: minioAdapter,
+      }
+    },
+    enabled: true
+  })
   ],
 })

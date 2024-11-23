@@ -12,5 +12,10 @@ export const Media: CollectionConfig = {
       required: true,
     },
   ],
-  upload: true,
+  upload:{
+    staticDir: 'media',
+    disableLocalStorage: true,
+    adminThumbnail: 'thumbnail',
+    mimeTypes: ['image/*']
+  },
 }
