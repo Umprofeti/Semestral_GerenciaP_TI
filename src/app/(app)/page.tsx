@@ -1,25 +1,36 @@
 import { Card, CardContent } from "@/app/(app)/components/ui/card";
-
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/app/(app)/components/ui/carousel";
-import { Input } from "@/app/(app)/components/ui/input"
+import { Input } from "@/app/(app)/components/ui/input";
 import { Search } from 'lucide-react';
 import Image from 'next/image';
 import CarouselEspecialidades from "@/app/(app)/components/carouselEspecialidades";
 import Header from "@/app/(app)/components/header";
 import DesktopNavigation from "@/app/(app)/components/desktopNavigation";
 import MobileNavigation from "@/app/(app)/components/mobileNavigation";
-import { GET } from "../my-route/route";
-import { getPayloadHMR } from '@payloadcms/next/utilities'
-import configPromise from '@payload-config'
-
-
+import { getPayloadHMR } from '@payloadcms/next/utilities';
+import configPromise from '@payload-config';
+import { Doctor } from "../../payload-types";
 
 export default async function Home() {
+  
+  // Obtener datos de los doctores desde Payload
+  const payload = await getPayloadHMR({ config: configPromise });
+  const data = await payload.find({
+    collection: "doctor",
+    where: {
+      "Doctor/a destacada?": {
+        equals: true,
+      },
+    },
+  });
 
+  data.docs.forEach((doctor: Doctor) => {
+    console.log(doctor.fotoDoctor)
+  });
 
   return (
     <div className="p-4 lg:pl-16 lg:pr-16 flex flex-col gap-4">
@@ -40,18 +51,15 @@ export default async function Home() {
         <CarouselEspecialidades />
       </div>
       <div>
-        <h2 className="m-3 text-xl md:text-2xl">Medicos Destacados</h2>
-        <CarouselMedicosDestacados />
+        <h2 className="m-3 text-xl md:text-2xl">Médicos Destacados</h2>
+        <CarouselMedicosDestacados doctors={data.docs} />
       </div>
       <MobileNavigation />
     </div>
   );
 }
 
-
-
-
-function CarouselMedicosDestacados() {
+function CarouselMedicosDestacados({ doctors }: { doctors: any[] }) {
   const color = "bg-[#cce7e4]"; // El color que quieres para todos
 
   return (
@@ -62,23 +70,25 @@ function CarouselMedicosDestacados() {
         }}
         className="w-full"
       >
-        <CarouselContent>
-          {Array.from({ length: 10 }).map((_, index) => (
-            <CarouselItem key={index} className="basis-1/3 md:basis-1/6">
-              <div className="p-1">
+        <CarouselContent className="flex justify-center">
+          {doctors.map((doctor) => (
+            <CarouselItem key={doctor.id} className="basis-1/3 md:basis-1/6">
+              <div className="p-1 flex flex-col gap-2">
                 <Card className={color}>
-                  <CardContent className="p-0 flex aspect-square items-center justify-center overflow-hidden">
-                    <Image
-                      src="/doctor.png"
-                      alt="Doctor destacado"
-                      width={170}
-                      height={170}
-                      className="p-2 rounded-2xl"
-                    />
-                  </CardContent>
+                <CardContent className="p-0 flex aspect-square items-center justify-center overflow-hidden">
+                  <Image
+                    src='/doctor.png'
+                    alt={`Foto de ${doctor.nombreDoctor}`}
+                    width={1000}
+                    height={1000}
+                    className="object-contain w-full h-full rounded-2xl"
+                  />
+                </CardContent>
                 </Card>
-                <h2>Doctor</h2>
-                <p>Especialidad</p>
+                <div className="flex flex-col justify-center items-center">
+                  <h2>{doctor.nombreDoctor}</h2>
+                  <p className="text-sm">{doctor.especialidad.Nombre}</p>
+                </div>
               </div>
             </CarouselItem>
           ))}
