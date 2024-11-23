@@ -12,6 +12,7 @@ import { Especialidad } from './collections/Especialidades'
 import { Doctores } from './collections/Doctor'
 import { Pacientes } from './collections/Pacientes'
 import { Citas } from './collections/Citas'
+import { Expedientes } from './collections/Expedientes'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -23,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Especialidad, Doctores, Pacientes, Citas],
+  collections: [Users, Media, Especialidad, Doctores, Pacientes, Citas, Expedientes],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

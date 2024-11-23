@@ -17,6 +17,7 @@ export interface Config {
     doctor: Doctor;
     pacientes: Paciente;
     citas: Cita;
+    expedientes: Expediente;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -29,6 +30,7 @@ export interface Config {
     doctor: DoctorSelect<false> | DoctorSelect<true>;
     pacientes: PacientesSelect<false> | PacientesSelect<true>;
     citas: CitasSelect<false> | CitasSelect<true>;
+    expedientes: ExpedientesSelect<false> | ExpedientesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -140,6 +142,7 @@ export interface Doctor {
 export interface Paciente {
   id: string;
   nombre: string;
+  fotoPaciente?: (string | null) | Media;
   apellido: string;
   identidadPersonal: string;
   fechaNacimiento: string;
@@ -159,6 +162,20 @@ export interface Cita {
   Doctor: string | Doctor;
   Paciente: string | Paciente;
   Completado?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "expedientes".
+ */
+export interface Expediente {
+  id: string;
+  paciente: string | Paciente;
+  'tipo sangre': 'O+' | 'O-' | 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-';
+  alergia?: string | null;
+  condiciones?: string | null;
+  medicamentos?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -192,6 +209,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'citas';
         value: string | Cita;
+      } | null)
+    | ({
+        relationTo: 'expedientes';
+        value: string | Expediente;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -306,6 +327,7 @@ export interface DoctorSelect<T extends boolean = true> {
  */
 export interface PacientesSelect<T extends boolean = true> {
   nombre?: T;
+  fotoPaciente?: T;
   apellido?: T;
   identidadPersonal?: T;
   fechaNacimiento?: T;
@@ -324,6 +346,19 @@ export interface CitasSelect<T extends boolean = true> {
   Doctor?: T;
   Paciente?: T;
   Completado?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "expedientes_select".
+ */
+export interface ExpedientesSelect<T extends boolean = true> {
+  paciente?: T;
+  'tipo sangre'?: T;
+  alergia?: T;
+  condiciones?: T;
+  medicamentos?: T;
   updatedAt?: T;
   createdAt?: T;
 }

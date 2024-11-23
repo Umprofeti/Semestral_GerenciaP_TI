@@ -16,6 +16,13 @@ export const Pacientes: CollectionConfig = {
             required: true,
         },
         {
+            name: 'fotoPaciente',
+            type: 'upload',
+            label: 'Foto del paciente',
+            relationTo: 'media',
+            required: false,
+        },
+        {
             name: 'apellido',
             type: 'text',
             required: true,
@@ -51,6 +58,6 @@ export const Pacientes: CollectionConfig = {
             name: 'contraseña',
             type: 'text',
             required: true,
-        }
+        },
     ],
 };
