@@ -77,7 +77,7 @@ function CarouselMedicosDestacados({ doctors }: { doctors: any[] }) {
                 <Card className={color}>
                 <CardContent className="p-0 flex aspect-square items-center justify-center overflow-hidden">
                   <Image
-                    src='/doctor.png'
+                    src={doctor.fotoDoctor.url}
                     alt={`Foto de ${doctor.nombreDoctor}`}
                     width={1000}
                     height={1000}
