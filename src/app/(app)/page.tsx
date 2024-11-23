@@ -15,6 +15,8 @@ import MobileNavigation from "@/app/(app)/components/mobileNavigation";
 import { GET } from "../my-route/route";
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import configPromise from '@payload-config'
+import { config } from "process";
+import { getPayload } from "payload";
 
 
 
@@ -51,9 +53,14 @@ export default async function Home() {
 
 
 
-function CarouselMedicosDestacados() {
+async function CarouselMedicosDestacados() {
   const color = "bg-[#cce7e4]"; // El color que quieres para todos
+  const payload = await getPayload({config: configPromise})
 
+  const data = await payload.find({
+    collection:'doctor'
+  })
+  console.log(data)
   return (
     <div className="flex justify-center">
       <Carousel

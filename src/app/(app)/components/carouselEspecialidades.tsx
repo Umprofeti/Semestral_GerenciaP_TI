@@ -49,6 +49,7 @@ const CarouselEspecialidades =async () => {
           <CarouselPrevious className="bg-[#89ccc5]" />
           <CarouselNext className="bg-[#89ccc5]" />
         </Carousel>
+      
       </div>
      );
 }
