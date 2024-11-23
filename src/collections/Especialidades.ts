@@ -1,14 +1,23 @@
-import type { CollectionConfig } from 'payload'
-
-export const Especialidad: CollectionConfig = {
-    slug: 'Especialidades',
-    admin: {},
-    fields:[
+export const Especialidad = {
+    slug: 'especialidades',
+    admin: {
+        useAsTitle: 'Nombre',
+    },
+    access: {
+        read: () => true,
+    },
+    fields: [
         {
-            name:'Nombre',
-            type:"text",
-            required:true,
-            unique:true
-        }
-    ]
-}
+            name: 'Nombre',
+            type: 'text',
+            required: true,
+            unique: true,
+        },
+        {
+            name: 'Color',
+            type: 'text',
+            required: true,
+            unique: true,
+        },
+    ],
+};

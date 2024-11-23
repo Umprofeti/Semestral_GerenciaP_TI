@@ -19,11 +19,6 @@ import configPromise from '@payload-config'
 
 
 export default async function Home() {
-  const payload = await getPayloadHMR({ config: configPromise })
-  const data = await payload.find({
-    collection: 'doctor',
-    
-  })
 
 
   return (

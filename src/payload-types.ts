@@ -13,7 +13,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    Especialidades: Especialidade;
+    especialidades: Especialidade;
     doctor: Doctor;
     pacientes: Paciente;
     'payload-locked-documents': PayloadLockedDocument;
@@ -24,7 +24,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    Especialidades: EspecialidadesSelect<false> | EspecialidadesSelect<true>;
+    especialidades: EspecialidadesSelect<false> | EspecialidadesSelect<true>;
     doctor: DoctorSelect<false> | DoctorSelect<true>;
     pacientes: PacientesSelect<false> | PacientesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -101,11 +101,12 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Especialidades".
+ * via the `definition` "especialidades".
  */
 export interface Especialidade {
   id: string;
   Nombre: string;
+  Color: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -118,17 +119,7 @@ export interface Doctor {
   nombreDoctor: string;
   'Doctor/a destacada?'?: boolean | null;
   fotoDoctor: string | Media;
-  especialidad:
-    | 'psiquiatria'
-    | 'cardiologia'
-    | 'dermatologia'
-    | 'urologia'
-    | 'ginecologia'
-    | 'neurologia'
-    | 'oftalmologia'
-    | 'oncologia'
-    | 'ortopedia'
-    | 'pediatria';
+  especialidad: string | Especialidade;
   diasDisponibles: 'lunes-viernes' | 'sabado-domingo' | 'lunes-miercoles-viernes' | 'martes-jueves';
   horario: {
     desde: string;
@@ -173,7 +164,7 @@ export interface PayloadLockedDocument {
         value: string | Media;
       } | null)
     | ({
-        relationTo: 'Especialidades';
+        relationTo: 'especialidades';
         value: string | Especialidade;
       } | null)
     | ({
@@ -261,10 +252,11 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Especialidades_select".
+ * via the `definition` "especialidades_select".
  */
 export interface EspecialidadesSelect<T extends boolean = true> {
   Nombre?: T;
+  Color?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -5,6 +5,9 @@ export const Doctores: CollectionConfig = {
     admin: {
         useAsTitle: 'nombreDoctor',
     },
+    access: {
+        read: () => true,
+    },
     fields: [
         {
             name: 'nombreDoctor',
@@ -28,22 +31,11 @@ export const Doctores: CollectionConfig = {
         },
         {
             name: 'especialidad',
-            type: 'select',
+            type: 'relationship',
             label: 'Tipo de especialidad',
+            relationTo: 'especialidades',
             required: true,
-            options: [
-                { label: 'Psiquiatría', value: 'psiquiatria' },
-                { label: 'Cardiología', value: 'cardiologia' },
-                { label: 'Dermatología', value: 'dermatologia' },
-                { label: 'Urología', value: 'urologia' },
-                { label: 'Ginecología', value: 'ginecologia' },
-                { label: 'Neurología', value: 'neurologia' },
-                { label: 'Oftalmología', value: 'oftalmologia' },
-                { label: 'Oncología', value: 'oncologia' },
-                { label: 'Ortopedía', value: 'ortopedia' },
-                { label: 'Pediatría', value: 'pediatria' },
-            ],
-        },        
+        },
         {
             name: 'diasDisponibles',
             type: 'select',
