@@ -6,8 +6,6 @@ import '../crearCuenta/crearCuenta.css'
 import Logo from '../public/doctor.svg'
 import Image from 'next/image'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { Users } from '../../../collections/Users'
-import { Link } from 'next/link'
 
 type Inputs = {
   email: string
@@ -23,7 +21,7 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      const req = await fetch(`http://localhost:3000/api/pacientes`, {
+      const req = await fetch(`http://localhost:3000/api/pacientes/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,9 +29,15 @@ const Login = () => {
         body: JSON.stringify(data),
       })
 
+      if (!req.ok) {
+        console.log('Error al iniciar sesion')
+        return
+      }
+
       const res = await req.json()
+      console.log(res)
     } catch (error) {
-      console.log(error)
+      console.log('error', error)
     }
   }
 
