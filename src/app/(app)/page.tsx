@@ -74,8 +74,8 @@ function CarouselMedicosDestacados({ doctors }: { doctors: any[] }) {
                   <Image
                     src={doctor.fotoDoctor.url}
                     alt={`Foto de ${doctor.nombreDoctor}`}
-                    width={10}
-                    height={10}
+                    width={1000}
+                    height={1000}
                     className="object-cover w-full h-full rounded-2xl"
                   />
                 </CardContent>
