@@ -6,7 +6,7 @@ import '../crearCuenta/crearCuenta.css'
 import Logo from '../public/doctor.svg'
 import Image from 'next/image'
 import { useForm, SubmitHandler } from 'react-hook-form'
-
+import { useRouter } from 'next/navigation'
 type Inputs = {
   email: string
   password: string
@@ -18,7 +18,8 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>()
-
+  
+  const router = useRouter()
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       const req = await fetch(`http://localhost:3000/api/pacientes/login`, {
@@ -35,7 +36,7 @@ const Login = () => {
       }
 
       const res = await req.json()
-      console.log(res)
+      router.push('/');
     } catch (error) {
       console.log('error', error)
     }

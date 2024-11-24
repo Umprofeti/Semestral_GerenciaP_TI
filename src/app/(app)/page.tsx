@@ -59,15 +59,10 @@ function CarouselMedicosDestacados({ doctors }: { doctors: any[] }) {
 
   return (
     <div className="flex justify-center">
-      <Carousel
-        opts={{
-          align: "start",
-        }}
-        className="w-full"
-      >
-        <CarouselContent className="flex justify-center">
+      <Carousel className="w-full">
+        <CarouselContent className="ml-0 flex">
           {doctors.map((doctor) => (
-            <CarouselItem key={doctor.id} className="basis-1/3 md:basis-1/6">
+            <CarouselItem key={doctor.id} className="basis-1/2 md:basis-1/6">
               <div className="p-1 flex flex-col gap-2">
                 <Card className={color}>
                 <CardContent className="p-2 flex aspect-square items-center justify-center overflow-hidden">

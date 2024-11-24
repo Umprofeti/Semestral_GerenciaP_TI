@@ -44,6 +44,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
+
   collections: [Users, Media, Especialidad, Doctores, Pacientes, Citas, Expedientes],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

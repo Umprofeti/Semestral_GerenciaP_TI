@@ -191,6 +191,8 @@ export interface Cita {
   Doctor: string | Doctor;
   Paciente: string | Paciente;
   Completado?: boolean | null;
+  Hora: string;
+  Fecha: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -201,7 +203,7 @@ export interface Cita {
 export interface Expediente {
   id: string;
   paciente: string | Paciente;
-  'tipo sangre': 'O+' | 'O-' | 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-';
+  tiposangre: 'O+' | 'O-' | 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-';
   alergia?: string | null;
   condiciones?: string | null;
   medicamentos?: string | null;
@@ -390,6 +392,8 @@ export interface CitasSelect<T extends boolean = true> {
   Doctor?: T;
   Paciente?: T;
   Completado?: T;
+  Hora?: T;
+  Fecha?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -399,7 +403,7 @@ export interface CitasSelect<T extends boolean = true> {
  */
 export interface ExpedientesSelect<T extends boolean = true> {
   paciente?: T;
-  'tipo sangre'?: T;
+  tiposangre?: T;
   alergia?: T;
   condiciones?: T;
   medicamentos?: T;

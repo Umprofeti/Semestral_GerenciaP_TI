@@ -30,5 +30,17 @@ export const Citas: CollectionConfig = {
             defaultValue:false,
             label:'¿Cita culminada?'
         },
+        {
+            name:'Hora',
+            type:'text',
+            required:true,
+            label:'Hora de cita'
+        },
+        {
+            name:'Fecha',
+            type:'date',
+            required:true,
+            label:'Fecha de la cita'
+        }
     ],
 };

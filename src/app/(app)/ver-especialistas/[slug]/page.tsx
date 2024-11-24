@@ -10,6 +10,7 @@ import DesktopNavigation from "@/app/(app)/components/desktopNavigation";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import CargandoPediatras from "../../components/cargandoPediatras";
 
 const especialidades = [
   { nombre: "Cardiología", url: "6740d69ef9de49d15ccdee66" },
@@ -78,61 +79,68 @@ const Especialidades = () => {
         </div>
         <Carousel orientation="horizontal" className="w-full hidden lg:block ">
           <CarouselContent className="-mt-1">
-
-            {result?.docs.map((doctor, index) => {
-              return (
-                <CarouselItem key={`doc-${index}`} className="pt-1 md:basis-1/4 ">
-                  <div className="p-1 ">
-                    <Card className="md:h-96 w-full bg-red-500">
-                      <CardContent className="flex md:flex-col items-center justify-center gap-2 bg-[#cce7e4] py-2 md:h-full">
-                        <div className="w-2/5 md:w-full flex justify-center items-center bg-[#8ccac3] rounded-lg overflow-hidden h-28 max-h-28 md:h-56 md:max-h-56">
-                          <Image src={doctor.fotoDoctor.url} width={420} height={360} alt={doctor.fotoDoctor.alt} className="h-full w-full object-cover" />
-                        </div>
-                        <div className="w-3/5 md:w-full flex items-center md:items-start ">
-                          <ul>
-                            <li>Dr/a. {doctor.nombreDoctor}</li>
-                            <li>Hora: {doctor.horario.desde} - {doctor.horario.hasta}</li>
-                            <li>Horario: {doctor.diasDisponibles}</li>
-                            <li>Costo: {doctor.costo}</li>
-                            <Link href={`/doctor-info/${doctor.id}`} className="font-semibold">Ver mas</Link>
-                          </ul>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </CarouselItem>
-              )
-            })}
+            {!loading?
+              result?.docs.map((doctor, index) => {
+                return (
+                  <CarouselItem key={`doc-${index}`} className="pt-1 md:basis-1/4 ">
+                    <div className="p-1 ">
+                      <Card className="md:h-96 w-full bg-red-500">
+                        <CardContent className="flex md:flex-col items-center justify-center gap-2 bg-[#cce7e4] py-2 md:h-full">
+                          <div className="w-2/5 md:w-full flex justify-center items-center bg-[#8ccac3] rounded-lg overflow-hidden h-28 max-h-28 md:h-56 md:max-h-56">
+                            <Image src={doctor.fotoDoctor.url} width={420} height={360} alt={doctor.fotoDoctor.alt} className="h-full w-full object-cover" />
+                          </div>
+                          <div className="w-3/5 md:w-full flex items-center md:items-start ">
+                            <ul>
+                              <li>Dr/a. {doctor.nombreDoctor}</li>
+                              <li>Hora: {doctor.horario.desde} - {doctor.horario.hasta}</li>
+                              <li>Horario: {doctor.diasDisponibles}</li>
+                              <li>Costo: {doctor.costo}</li>
+                              <Link href={`/doctor-info/${doctor.id}`} className="font-semibold">Ver mas</Link>
+                            </ul>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </CarouselItem>
+                )
+              })
+            :
+              <CargandoPediatras/>
+            }
           </CarouselContent>
         </Carousel>
 
 
         <Carousel orientation="vertical" className="w-full lg:hidden">
           <CarouselContent className="-mt-1">
-            {result?.docs.map((doctor, index) => {
-              return (
-                <CarouselItem key={`docM-${index}`} className="pt-1 md:basis-1/4 ">
-                  <div className="p-1 ">
-                    <Card>
-                      <CardContent className="flex md:flex-col items-center justify-center gap-2 bg-[#cce7e4] py-2 md:h-full">
-                        <div className="w-2/5 md:w-full flex justify-center items-center bg-[#8ccac3] rounded-lg overflow-hidden h-28 max-h-28 md:h-56 md:max-h-56 ">
-                          <Image src={doctor.fotoDoctor.url} width={420} height={360} alt={doctor.fotoDoctor.alt} className="h-full w-full object-cover" />
-                        </div>
-                        <div className="w-3/5 md:w-full text-sm md:text-lg  flex items-center md:items-start md:mt-6">
-                          <ul>
-                            <li>Dr/a. {doctor.nombreDoctor}</li>
-                            <li>Hora: {doctor.horario.desde} - {doctor.horario.hasta}</li>
-                            <li>Horario: {doctor.diasDisponibles}</li>
-                            <li>Costo: {doctor.costo}</li>
-                            <Link href="/doctor-info" className="font-semibold text-center w-full">Ver mas</Link>
-                          </ul>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </CarouselItem>
-              )
-            })}
+            {!loading?
+              result?.docs.map((doctor, index) => {
+                return (
+                  <CarouselItem key={`docM-${index}`} className="pt-1 md:basis-1/4 ">
+                    <div className="p-1 ">
+                      <Card>
+                        <CardContent className="flex md:flex-col items-center justify-center gap-2 bg-[#cce7e4] py-2 md:h-full">
+                          <div className="w-2/5 md:w-full flex justify-center items-center bg-[#8ccac3] rounded-lg overflow-hidden h-28 max-h-28 md:h-56 md:max-h-56 ">
+                            <Image src={doctor.fotoDoctor.url} width={420} height={360} alt={doctor.fotoDoctor.alt} className="h-full w-full object-cover" />
+                          </div>
+                          <div className="w-3/5 md:w-full text-sm md:text-lg  flex items-center md:items-start md:mt-6">
+                            <ul>
+                              <li>Dr/a. {doctor.nombreDoctor}</li>
+                              <li>Hora: {doctor.horario.desde} - {doctor.horario.hasta}</li>
+                              <li>Horario: {doctor.diasDisponibles}</li>
+                              <li>Costo: {doctor.costo}</li>
+                              <Link href={`/doctor-info/${doctor.id}`} className="font-semibold text-center w-full">Ver mas</Link>
+                            </ul>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </CarouselItem>
+                )
+              })
+            :
+              <CargandoPediatras/>
+            }
           </CarouselContent>
         </Carousel>
 

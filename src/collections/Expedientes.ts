@@ -7,7 +7,8 @@ export const Expedientes: CollectionConfig = {
     },
     access: {
         read: () => true,
-        create: () => true
+        create: () => true,
+        update:()=>true
       },
     fields: [
         {
@@ -17,7 +18,7 @@ export const Expedientes: CollectionConfig = {
             required:true
         },
         {
-            name: 'tipo sangre',
+            name: 'tiposangre',
             type: 'select',
             options: [
                 {
