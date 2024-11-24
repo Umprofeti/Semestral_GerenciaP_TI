@@ -29,15 +29,16 @@ const CrearCuenta = () => {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     if (data.password === data.passwornConfirm) {
       const dataPaciente = {
+        email: data.email,
+        password: data.password,
         nombre: data.name,
         apellido: data.lastName,
         identidadPersonal: data.userId,
         fechaNacimiento: data.dateBirth,
-        direccion: data.address,
         telefono: data.phoneNumber,
-        correo: data.email,
-        contraseña: data.password,
+        direccion: data.address,
       }
+      console.log(dataPaciente)
 
       try {
         const req = await fetch(`http://localhost:3000/api/pacientes`, {
@@ -49,6 +50,7 @@ const CrearCuenta = () => {
         })
 
         const res = await req.json()
+        console.log('HOLAAAA', res)
       } catch (error) {
         console.log(error)
       }

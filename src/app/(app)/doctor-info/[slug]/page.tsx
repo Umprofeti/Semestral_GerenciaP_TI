@@ -42,7 +42,7 @@ const DoctorInfo = () => {
   }, []);
 
   return (
-    <div className="flex flex-col p-6 gap-y-4">
+    <div className="flex flex-col gap-y-4 p-4">
       <Header/>
       <DesktopNavigation/>
 
@@ -62,23 +62,25 @@ const DoctorInfo = () => {
               return(
                 <React.Fragment key={index}>
                   {/* Presentacion del Doctor */}
-                  <div className="flex-1 flex justify-center items-center gap-x-6">
-                    <div>
+                  <div className="flex-1 flex justify-center items-center md:px-6">
+                    <div className="w-1/2">
                       <div className="text-xl md:text-3xl">{doctor.nombreDoctor}</div>
                       <div className="text-lg text-[#3f3c3c] md:text-2xl">{doctor.especialidad.Nombre}</div>
                     </div>
-                    <Image
-                    src={doctor.fotoDoctor.url}
-                    alt={doctor.fotoDoctor.alt}
-                      width={150}  
-                      height={150} 
-                      className="w-36 h-auto md:w-64 md:h-auto" 
-                      sizes="(max-width: 768px) 150px, (min-width: 768px) 256px"
-                    />
+                    <div className="w-1/2 max-h-48 md:max-h-72 overflow-hidden ">
+                      <Image
+                      src={doctor.fotoDoctor.url}
+                      alt={doctor.fotoDoctor.alt}
+                        width={150}  
+                        height={150} 
+                        className="w-full h-full object-cover" 
+                        // sizes="(max-width: 768px) 150px, (min-width: 768px) 256px"
+                      />
+                    </div>
                   </div>     
   
                   {/* Descripcion del Doctor */}
-                  <div className="flex-1 flex flex-col items-center">
+                  <div className="flex-1 flex flex-col items-center justify-center">
                     <Card >
                       <CardHeader>
                         <CardDescription className="text-base text-black flex flex-col gap-y-4">

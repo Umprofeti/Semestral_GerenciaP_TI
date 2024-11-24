@@ -5,6 +5,7 @@ export const Pacientes: CollectionConfig = {
     admin: {
         useAsTitle: 'nombre',
     },
+    auth:true,
     access: {
         read: () => true,
         create: () => true
@@ -45,17 +46,6 @@ export const Pacientes: CollectionConfig = {
         },
         {
             name: 'telefono',
-            type: 'text',
-            required: true,
-        },
-        {
-            name: 'correo',
-            type: 'email',
-            required: true,
-            unique: true,
-        },
-        {
-            name: 'contraseña',
             type: 'text',
             required: true,
         },

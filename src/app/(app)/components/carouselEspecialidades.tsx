@@ -9,13 +9,13 @@ import {
 import { Card, CardContent } from "@/app/(app)/components/ui/card";
 import { CalendarRange } from "lucide-react";
 import Link from "next/link";
-import { getPayloadHMR } from "@payloadcms/next/utilities";
+import { getPayload } from "payload";
 import configPromise from '@payload-config'
 
 
 const CarouselEspecialidades =async () => {
 
-  const payload = await getPayloadHMR({ config: configPromise })
+  const payload = await getPayload({ config: configPromise })
   const dataEspecialidad = await payload.find({
     collection: 'especialidades',
     
@@ -35,7 +35,8 @@ const CarouselEspecialidades =async () => {
               <CarouselItem key={index} className="pl-8 basis-1/3 sm:basis-1/4 md:basis-1/6">
                 <Link href={`/ver-especialistas/${especialidad.id}`}>
                   <div>
-                    <Card className={especialidad.Color}>
+                    <Card style={{ backgroundColor: `#${especialidad.Color}` }}>
+                      {/* especialidad.Color */}
                       <CardContent className="p-0 flex aspect-square items-center justify-center">
                         <CalendarRange size={46} color="#fff" />
                       </CardContent>

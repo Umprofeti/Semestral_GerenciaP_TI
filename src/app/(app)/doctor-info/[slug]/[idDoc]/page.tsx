@@ -61,10 +61,10 @@ const AddCita = () => {
   };
 
   return (
-    <div className="flex flex-col  gap-y-4">
+    <div className="flex flex-col gap-y-4">
       <Header />
       <DesktopNavigation />
-      <div className="flex flex-col gap-y-6">
+      <div className="flex flex-col gap-y-6 px-6">
         <h1 className="text-2xl sm:text-3xl">
           Agendar <span className="text-[#89ccc5] block sm:inline">Cita</span>
         </h1>
@@ -72,20 +72,16 @@ const AddCita = () => {
           {/* Presentacion del Doctor */}
           {result?.docs.map((doctor, index)=>{
             return(
-              <div key={index} className="flex-1 flex justify-center items-center gap-x-6">
-                <div>
-                  <div className="text-xl md:text-3xl">Dr/a. {doctor.nombreDoctor}</div>
-                  <div className="text-lg text-[#3f3c3c] md:text-2xl">{doctor.especialidad.Nombre}</div>
-                </div>
+              <div key={index} className="w-1/2 max-h-48 md:max-h-72 overflow-hidden ">
                 <Image
-                  src={doctor.fotoDoctor.url}
-                  alt={doctor.fotoDoctor.alt}
-                  width={150}
-                  height={150}
-                  className="w-36 h-auto md:w-64 md:h-auto"
-                  sizes="(max-width: 768px) 150px, (min-width: 768px) 256px"
+                src={doctor.fotoDoctor.url}
+                alt={doctor.fotoDoctor.alt}
+                width={150}  
+                height={150} 
+                className="w-full mx-auto h-full object-cover" 
                 />
               </div>
+
             )
           })}
           {/* Descripcion del Doctor */}

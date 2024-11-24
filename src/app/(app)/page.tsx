@@ -11,14 +11,13 @@ import CarouselEspecialidades from "@/app/(app)/components/carouselEspecialidade
 import Header from "@/app/(app)/components/header";
 import DesktopNavigation from "@/app/(app)/components/desktopNavigation";
 import MobileNavigation from "@/app/(app)/components/mobileNavigation";
-import { getPayloadHMR } from '@payloadcms/next/utilities';
+import { getPayload } from "payload";
 import configPromise from '@payload-config';
-import { Doctor } from "../../payload-types";
 
 export default async function Home() {
   
   // Obtener datos de los doctores desde Payload
-  const payload = await getPayloadHMR({ config: configPromise });
+  const payload = await getPayload({ config: configPromise });
   const data = await payload.find({
     collection: "doctor",
     where: {
@@ -26,10 +25,6 @@ export default async function Home() {
         equals: true,
       },
     },
-  });
-
-  data.docs.forEach((doctor: Doctor) => {
-    console.log(doctor.fotoDoctor)
   });
 
   return (
@@ -75,13 +70,13 @@ function CarouselMedicosDestacados({ doctors }: { doctors: any[] }) {
             <CarouselItem key={doctor.id} className="basis-1/3 md:basis-1/6">
               <div className="p-1 flex flex-col gap-2">
                 <Card className={color}>
-                <CardContent className="p-0 flex aspect-square items-center justify-center overflow-hidden">
+                <CardContent className="p-2 flex aspect-square items-center justify-center overflow-hidden">
                   <Image
                     src={doctor.fotoDoctor.url}
                     alt={`Foto de ${doctor.nombreDoctor}`}
-                    width={1000}
-                    height={1000}
-                    className="object-contain w-full h-full rounded-2xl"
+                    width={10}
+                    height={10}
+                    className="object-cover w-full h-full rounded-2xl"
                   />
                 </CardContent>
                 </Card>
