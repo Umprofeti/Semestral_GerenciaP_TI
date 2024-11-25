@@ -12,41 +12,19 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import CargandoPediatras from "../../components/cargandoPediatras";
 
-const especialidades = [
-  { nombre: "Cardiología", url: "6740d69ef9de49d15ccdee66" },
-  { nombre: "Dermatología", url: "6740d6a9f9de49d15ccdee8a" },
-  { nombre: "Urología", url: "6740d6b5f9de49d15ccdeeae" },
-  { nombre: "Ginecología", url: "6740d6bff9de49d15ccdeed3" },
-  { nombre: "Neurología", url: "6740d6cdf9de49d15ccdeefb" },
-  { nombre: "Oftalmología", url: "6740d6eaf9de49d15ccdef32" },
-  { nombre: "Oncología", url: "6740d6f3f9de49d15ccdef55" },
-  { nombre: "Ortopedia", url: "6740d732f9de49d15ccdef78" },
-  { nombre: "Pediatría", url: "6740d73ff9de49d15ccdef9d" },
-  { nombre: "Psiquiatría", url: "6740d68ff9de49d15ccdee43" }
-];
-
 const Especialidades = () => {
 
   const { slug } = useParams();
   const [result, setResult] = useState<EspecialistaResponse>();
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  const [especialidadNombre, setEspecialidadNombre] = useState("");
-
-  useEffect(() => {
-    // Busca la especialidad basada en el slug
-    const especialidad = especialidades.find((esp) => esp.url === slug);
-    if (especialidad) {
-      setEspecialidadNombre(especialidad.nombre);
-    } else {
-      setEspecialidadNombre("Especialidad no encontrada");
-    }
-  }, [slug]);
+  //Borrar
+  const idusuario = '674275b2304b0c977fbe1b48test'
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const req = await fetch(`http://localhost:3000/api/doctor?where[especialidad][equals]=${slug}`, {
+        const req = await fetch(`http://localhost:3000/api/doctor?where[especialidad.Nombre][equals]=${slug}`, {
           method: "GET",
           credentials: "include",
           headers: {
@@ -65,21 +43,50 @@ const Especialidades = () => {
     fetchData();
   }, []);
 
+  if (!loading) {
+    if (result?.docs.length == 0) {
+      return (
+        <div className="">
+          <Header />
+          <DesktopNavigation />
+          <div className="px-6">
+            <h1 className="text-2xl sm:text-3xl my-4">
+              Especialistas en, <span className="text-[#89ccc5] block sm:inline">
+                {decodeURIComponent(Array.isArray(slug) ? slug.join('') : slug || '')}
+              </span>
+            </h1>
+            <div className="relative md:hidden">
+              <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input placeholder="Search" className="pl-8" />
+            </div>
+          </div>
+          <div className="flex flex-col w-full px-6  py-6">
+            <h2 className="text-center">Error, no se ha encontrado doctores con la especialidad: {decodeURIComponent(Array.isArray(slug) ? slug.join('') : slug || '')}</h2>
+            <Link href={`/dashboard/user/${idusuario}`} className="w-1/2 md:w-1/6 text-center py-3  bg-[#89ccc5] hover:bg-[#6fa09b] text-white rounded my-4">Regresar al inicio</Link>
+          </div>
+        </div>
+      )
+    }
+  }
+
   return (
     <div className="">
       <Header />
       <DesktopNavigation />
       <div className="px-6">
         <h1 className="text-2xl sm:text-3xl my-4">
-          Especialistas en, <span className="text-[#89ccc5] block sm:inline">{especialidadNombre}</span>
+          Especialistas en, <span className="text-[#89ccc5] block sm:inline">
+            {decodeURIComponent(Array.isArray(slug) ? slug.join('') : slug || '')}
+          </span>
         </h1>
         <div className="relative md:hidden">
           <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input placeholder="Search" className="pl-8" />
         </div>
+        {/* Carousel escritorio */}
         <Carousel orientation="horizontal" className="w-full hidden lg:block ">
           <CarouselContent className="-mt-1">
-            {!loading?
+            {!loading ?
               result?.docs.map((doctor, index) => {
                 return (
                   <CarouselItem key={`doc-${index}`} className="pt-1 md:basis-1/4 ">
@@ -104,16 +111,16 @@ const Especialidades = () => {
                   </CarouselItem>
                 )
               })
-            :
-              <CargandoPediatras/>
+              :
+              <CargandoPediatras />
             }
           </CarouselContent>
         </Carousel>
 
-
+        {/* Carousel movil */}
         <Carousel orientation="vertical" className="w-full lg:hidden">
           <CarouselContent className="-mt-1">
-            {!loading?
+            {!loading ?
               result?.docs.map((doctor, index) => {
                 return (
                   <CarouselItem key={`docM-${index}`} className="pt-1 md:basis-1/4 ">
@@ -138,8 +145,8 @@ const Especialidades = () => {
                   </CarouselItem>
                 )
               })
-            :
-              <CargandoPediatras/>
+              :
+              <CargandoPediatras />
             }
           </CarouselContent>
         </Carousel>

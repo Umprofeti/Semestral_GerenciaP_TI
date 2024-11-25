@@ -33,7 +33,7 @@ const CarouselEspecialidades =async () => {
           <CarouselContent className="-ml-8">
             {dataEspecialidad.docs.map((especialidad, index) => (
               <CarouselItem key={index} className="pl-8 basis-1/3 sm:basis-1/4 md:basis-1/6">
-                <Link href={`/ver-especialistas/${especialidad.id}`}>
+                <Link href={`/ver-especialistas/${encodeURIComponent(especialidad.Nombre)}`}>
                   <div>
                     <Card style={{ backgroundColor: `#${especialidad.Color}` }}>
                       {/* especialidad.Color */}
