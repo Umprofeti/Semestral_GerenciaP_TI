@@ -32,15 +32,21 @@ export const Citas: CollectionConfig = {
         },
         {
             name:'Hora',
-            type:'text',
+            type:'date',
+            label:'Hora de cita',
             required:true,
-            label:'Hora de cita'
+            admin: {
+                date: {
+                    pickerAppearance: 'timeOnly',
+                    displayFormat: 'h:mm aa',
+                }
+            }  
         },
         {
             name:'Fecha',
             type:'date',
+            label:'Fecha de la cita',
             required:true,
-            label:'Fecha de la cita'
         }
     ],
 };
