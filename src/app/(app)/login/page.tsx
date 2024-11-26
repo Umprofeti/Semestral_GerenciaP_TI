@@ -18,7 +18,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>()
-  
+
   const router = useRouter()
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
@@ -36,7 +36,7 @@ const Login = () => {
       }
 
       const res = await req.json()
-      router.push('/');
+      router.push('/')
     } catch (error) {
       console.log('error', error)
     }

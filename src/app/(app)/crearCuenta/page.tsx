@@ -6,6 +6,7 @@ import Logo from '../public/doctor.svg'
 import Image from 'next/image'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Users } from '../../../collections/Users'
+import { postLocalAPI } from '../utils/localAPI'
 
 type Inputs = {
   name: string
@@ -39,21 +40,21 @@ const CrearCuenta = () => {
         direccion: data.address,
       }
       console.log(dataPaciente)
+      postLocalAPI(dataPaciente)
+      // try {
+      //   const req = await fetch(`http://localhost:3000/api/pacientes`, {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify(dataPaciente),
+      //   })
 
-      try {
-        const req = await fetch(`http://localhost:3000/api/pacientes`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(dataPaciente),
-        })
-
-        const res = await req.json()
-        console.log('HOLAAAA', res)
-      } catch (error) {
-        console.log(error)
-      }
+      //   const res = await req.json()
+      //   console.log('HOLAAAA', res)
+      // } catch (error) {
+      //   console.log(error)
+      // }
     } else {
       alert('confirma correctamente la contraseña por favor')
     }
