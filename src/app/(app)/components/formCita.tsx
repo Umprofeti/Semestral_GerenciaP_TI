@@ -5,16 +5,19 @@ import { Input } from "@/app/(app)/components/ui/input";
 import { Button } from "@/app/(app)/components/ui/button";
 import { Label } from "@/app/(app)/components/ui/label";
 import { LoaderIcon } from "lucide-react";
+import { useParams } from "next/navigation";
 
-export default function FormCita({ infoDoctor }) {
+export default function FormCita() {
+    const {idpaciente} = useParams()
+    const { iddoctor } = useParams()
 
     const [subiendoInfo, setSubiendoInfo]=useState(false)
 
     const [form, setForm] = useState({
         Completado: false,
-        Doctor:  "",
-        Paciente: "674275b2304b0c977fbe1b48",
-        Hora: "",
+        Doctor:  iddoctor,
+        Paciente: idpaciente,
+        Hora: '1129-12-31T18:18:08.000+00:00',
         Fecha: ""
     });
 
@@ -65,13 +68,13 @@ export default function FormCita({ infoDoctor }) {
         console.log('Actualizado')
         setForm({
             Completado: false,
-            Doctor: infoDoctor?.id || "",
-            Paciente: "674275b2304b0c977fbe1b48",
-            Hora: "",
+            Doctor: iddoctor || "",
+            Paciente: idpaciente,
+            Hora: '1129-12-31T18:18:08.000+00:00',
             Fecha: ""
         });
 
-    }, [infoDoctor]);
+    }, [iddoctor]);
 
 
     return (
@@ -116,6 +119,7 @@ export default function FormCita({ infoDoctor }) {
                         value={form.Hora}
                         onChange={handleChange}
                         required
+                        step="2"
                     />
                 </div>
                 <Button type="submit" className={`w-full  ${subiendoInfo?'bg-[#6f9b96]':'bg-[#89ccc5]'}`} disabled={subiendoInfo?true:false}>

@@ -11,6 +11,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <body className="antialiased flex flex-col min-h-screen pb-20 md:pb-0"> {/* `pb-20` solo en móviles (debajo de `md`) */}

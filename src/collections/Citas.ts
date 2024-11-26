@@ -7,7 +7,8 @@ export const Citas: CollectionConfig = {
     },
     access: {
         read: () => true,
-        create: () => true
+        create: () => true,
+        delete:()=>true
       },
     fields: [
         {
@@ -23,6 +24,13 @@ export const Citas: CollectionConfig = {
             label:'Paciente',
             relationTo:'pacientes',
             required: true
+        },
+        {
+            name:'cancelado',
+            type:'checkbox',
+            label:'Cancelado?',
+            required:true,
+            defaultValue:false
         },
         {
             name:'Completado',

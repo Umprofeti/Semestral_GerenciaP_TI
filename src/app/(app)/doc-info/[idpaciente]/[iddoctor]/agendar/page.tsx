@@ -1,6 +1,6 @@
 'use client'
 
-import DesktopNavigation from "../../../components/desktopNavigation";
+import DesktopNavigation from "@/app/(app)/components/desktopNavigation";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ import FormCita from "@/app/(app)/components/formCita";
 
 const AddCita = () => {
 
-  const { idDoc } = useParams()
+  const { iddoctor } = useParams()
 
   const [result, setResult] = useState<InformacionDoctoresType>();
   const [loading, setLoading] = useState(true)
@@ -18,7 +18,7 @@ const AddCita = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const req = await fetch(`http://localhost:3000/api/doctor?where[id][equals]=${idDoc}`, {
+        const req = await fetch(`http://localhost:3000/api/doctor?where[id][equals]=${iddoctor}`, {
           method: "GET",
           credentials: "include",
           headers: {

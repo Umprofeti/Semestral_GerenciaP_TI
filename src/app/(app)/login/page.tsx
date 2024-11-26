@@ -17,7 +17,6 @@ type Inputs = {
 
 const Login = () => {
 
-  const { state, updateState } = useUserConext();
 
 
   const {
@@ -43,9 +42,9 @@ const Login = () => {
       }
 
       const res = await req.json()
-      console.log(res)
-      updateState(res.user)
       router.push(`/dashboard/user/${res.user.id}`);
+      console.log(res)
+
     } catch (error) {
       console.log('error', error)
     }

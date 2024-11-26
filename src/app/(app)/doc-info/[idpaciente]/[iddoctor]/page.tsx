@@ -13,7 +13,8 @@ import React, { useEffect, useState } from "react"
 
 const DoctorInfo = () => {
 
-  const {slug} = useParams()
+  const {iddoctor} = useParams()
+  const {idpaciente} = useParams()
 
   const [result, setResult] = useState<InformacionDoctoresType>();
   const [loading, setLoading] =useState(true)
@@ -22,7 +23,7 @@ const DoctorInfo = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const req = await fetch(`http://localhost:3000/api/doctor?where[id][equals]=${slug}`, {
+        const req = await fetch(`http://localhost:3000/api/doctor?where[id][equals]=${iddoctor}`, {
           method: "GET",
           credentials: "include",
           headers: {
@@ -47,9 +48,9 @@ const DoctorInfo = () => {
       <DesktopNavigation/>
 
       <div className="flex flex-col gap-y-6">
-        <h1 className="text-2xl sm:text-3xl">
+        {/* <h1 className="text-2xl sm:text-3xl">
           Especialistas en, <span className="text-[#89ccc5] block sm:inline">{result?.docs[0].especialidad.Nombre}</span>
-        </h1>
+        </h1> */}
 
         <div className="relative md:hidden">
           <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -102,7 +103,7 @@ const DoctorInfo = () => {
                         {doctor.descripcion}
                       </CardContent>
                     </Card>
-                    <Link className="bg-[#89ccc5] hover:bg-[#70a8a3] mx-auto h-12 px-3 mt-2 text-lg font-normal rounded flex justify-center items-center text-white" href={`/doctor-info/${slug}/${doctor.id}`}>Agendar Cita</Link>
+                    <Link className="bg-[#89ccc5] hover:bg-[#70a8a3] mx-auto h-12 px-3 mt-2 text-lg font-normal rounded flex justify-center items-center text-white" href={`/doc-info/${idpaciente}/${doctor.id}/agendar`}>Agendar Cita</Link>
                   </div>
                 </React.Fragment>
               )

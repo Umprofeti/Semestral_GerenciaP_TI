@@ -3,12 +3,14 @@ import type { CollectionConfig } from 'payload';
 export const Pacientes: CollectionConfig = {
     slug: 'pacientes',
     admin: {
-        useAsTitle: 'nombre',
+        useAsTitle: 'apellido',
     },
     auth: true,
     access: {
         read: () => true,
-        create: () => true
+        create: () => true,
+        update:()=>true,
+        delete:()=>true
     },
     fields: [
         {
