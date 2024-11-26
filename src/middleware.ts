@@ -7,7 +7,6 @@ export async function middleware(req: NextRequest) {
   console.log('token', token)
 
   if (!token) return NextResponse.redirect(new URL('/login', req.url))
-
   // try {
   //   const user = await payload.verifyEmail({
   //     collection: 'pacientes',
