@@ -1,16 +1,17 @@
+'use client'
 import { Avatar } from "@radix-ui/react-avatar";
 import Image from "next/image";
 import { AvatarFallback, AvatarImage } from "./ui/avatar";
 import Link from "next/link";
-
+import { useUserConext } from "../context/userContext";
 const Header = () => {
 
-  //Borrar
-  const idusuario = '674275b2304b0c977fbe1b48test'
+  const { state, updateState } = useUserConext();
+
 
     return ( 
     <header className="flex items-center justify-between mb-4">
-        <Link href={`/dashboard/user/${idusuario}`}>
+        <Link href={`/dashboard/user/${state.id}`}>
           <Image
               src="/logo.svg"
               alt="Logo"
@@ -24,7 +25,7 @@ const Header = () => {
   
          {/* Imagen de perfil solo visible en dispositivos de escritorio */}
          <Avatar className="w-20 h-20"> {/* Set size with Tailwind classes */}
-          <AvatarImage src="/profile.jpg" alt="@shadcn" className="object-cover rounded-full" />
+          <AvatarImage src={state.fotoPaciente.url} alt="@shadcn" className="object-cover rounded-full" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </header>

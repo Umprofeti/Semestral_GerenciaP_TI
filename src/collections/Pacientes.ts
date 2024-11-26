@@ -5,11 +5,11 @@ export const Pacientes: CollectionConfig = {
     admin: {
         useAsTitle: 'nombre',
     },
-    auth:true,
+    auth: true,
     access: {
         read: () => true,
         create: () => true
-      },
+    },
     fields: [
         {
             name: 'nombre',
@@ -33,6 +33,21 @@ export const Pacientes: CollectionConfig = {
             type: 'text',
             required: true,
             unique: true,
+        },
+        {
+            name: 'genero',
+            type: 'select',
+            options: [
+                {
+                    label: 'Hombre',
+                    value: 'Hombre'
+                }, {
+                    label: 'Mujer',
+                    value: 'Mujer'
+                }
+            ],
+            defaultValue:'Mujer',
+            required:true
         },
         {
             name: 'fechaNacimiento',

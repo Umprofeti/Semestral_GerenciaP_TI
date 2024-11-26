@@ -4,8 +4,8 @@ import DesktopNavigation from "@/app/(app)/components/desktopNavigation";
 import { getPayload } from "payload";
 import configPromise from '@payload-config'
 import { PencilLine } from "lucide-react";
-import InfoPaciente from "../../components/infoPaciente";
-import InfoFotoPaciente from "../../components/infoFotoPaciente";
+import InfoPaciente from "../../../components/infoPaciente";
+import InfoFotoPaciente from "../../../components/infoFotoPaciente";
 
 const ProfUser = async () => {
 

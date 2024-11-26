@@ -9,6 +9,7 @@
 export interface Config {
   auth: {
     users: UserAuthOperations;
+    doctor: DoctorAuthOperations;
     pacientes: PacienteAuthOperations;
   };
   collections: {
@@ -46,6 +47,9 @@ export interface Config {
     | (User & {
         collection: 'users';
       })
+    | (Doctor & {
+        collection: 'doctor';
+      })
     | (Paciente & {
         collection: 'pacientes';
       });
@@ -55,6 +59,24 @@ export interface Config {
   };
 }
 export interface UserAuthOperations {
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
+}
+export interface DoctorAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -157,6 +179,14 @@ export interface Doctor {
   descripcion?: string | null;
   updatedAt: string;
   createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -168,6 +198,7 @@ export interface Paciente {
   fotoPaciente?: (string | null) | Media;
   apellido: string;
   identidadPersonal: string;
+  genero: 'Hombre' | 'Mujer';
   fechaNacimiento: string;
   direccion?: string | null;
   telefono: string;
@@ -252,6 +283,10 @@ export interface PayloadLockedDocument {
         value: string | User;
       }
     | {
+        relationTo: 'doctor';
+        value: string | Doctor;
+      }
+    | {
         relationTo: 'pacientes';
         value: string | Paciente;
       };
@@ -268,6 +303,10 @@ export interface PayloadPreference {
     | {
         relationTo: 'users';
         value: string | User;
+      }
+    | {
+        relationTo: 'doctor';
+        value: string | Doctor;
       }
     | {
         relationTo: 'pacientes';
@@ -361,6 +400,13 @@ export interface DoctorSelect<T extends boolean = true> {
   descripcion?: T;
   updatedAt?: T;
   createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -371,6 +417,7 @@ export interface PacientesSelect<T extends boolean = true> {
   fotoPaciente?: T;
   apellido?: T;
   identidadPersonal?: T;
+  genero?: T;
   fechaNacimiento?: T;
   direccion?: T;
   telefono?: T;

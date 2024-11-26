@@ -15,7 +15,7 @@ import { getPayload } from "payload";
 import configPromise from '@payload-config';
 
 export default async function Home() {
-  
+
   // Obtener datos de los doctores desde Payload
   const payload = await getPayload({ config: configPromise });
   const data = await payload.find({
@@ -31,7 +31,7 @@ export default async function Home() {
     <div className="p-4 lg:pl-16 lg:pr-16 flex flex-col gap-4">
       <Header />
       <DesktopNavigation />
-      <h1 className="text-2xl sm:text-3xl">
+      <h1 className="text-2xl sm:text-3xl mt-4">
         Bienvenido, <span className="text-[#89ccc5] block sm:inline">Nombre Apellido</span>
       </h1>
 
@@ -65,15 +65,15 @@ function CarouselMedicosDestacados({ doctors }: { doctors: any[] }) {
             <CarouselItem key={doctor.id} className="basis-1/2 md:basis-1/6">
               <div className="p-1 flex flex-col gap-2">
                 <Card className={color}>
-                <CardContent className="p-2 flex aspect-square items-center justify-center overflow-hidden">
-                  <Image
-                    src={doctor.fotoDoctor.url}
-                    alt={`Foto de ${doctor.nombreDoctor}`}
-                    width={1000}
-                    height={1000}
-                    className="object-cover w-full h-full rounded-2xl"
-                  />
-                </CardContent>
+                  <CardContent className="p-2 flex aspect-square items-center justify-center overflow-hidden">
+                    <Image
+                      src={doctor.fotoDoctor.url}
+                      alt={`Foto de ${doctor.nombreDoctor}`}
+                      width={1000}
+                      height={1000}
+                      className="object-cover w-full h-full rounded-2xl"
+                    />
+                  </CardContent>
                 </Card>
                 <div className="flex flex-col justify-center items-center">
                   <h2>{doctor.nombreDoctor}</h2>
