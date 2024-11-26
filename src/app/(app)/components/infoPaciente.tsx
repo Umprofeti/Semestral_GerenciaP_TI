@@ -35,7 +35,7 @@ const InfoPaciente = () => {
                 setResult(data)
                 setLoading(false)
             } catch (err) {
-                setError(error)
+                setError(err)
                 setLoading(false)
             }
         };

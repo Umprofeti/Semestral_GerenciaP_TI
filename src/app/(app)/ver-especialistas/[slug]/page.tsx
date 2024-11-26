@@ -11,6 +11,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import CargandoPediatras from "../../components/cargandoPediatras";
+import BusquedaDoctor from "../../components/busquedaDoctor";
 
 const Especialidades = () => {
 
@@ -80,8 +81,7 @@ const Especialidades = () => {
           </span>
         </h1>
         <div className="relative md:hidden">
-          <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input placeholder="Search" className="pl-8" />
+          <BusquedaDoctor/>
         </div>
         {/* Carousel escritorio */}
         <Carousel orientation="horizontal" className="w-full hidden lg:block ">
