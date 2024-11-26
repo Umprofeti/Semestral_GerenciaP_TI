@@ -195,13 +195,14 @@ export interface Doctor {
 export interface Paciente {
   id: string;
   nombre: string;
-  fotoPaciente?: (string | null) | Media;
   apellido: string;
   identidadPersonal: string;
   genero: 'Hombre' | 'Mujer';
   fechaNacimiento: string;
-  direccion?: string | null;
+  edad: number;
   telefono: string;
+  direccion?: string | null;
+  fotoPaciente?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -414,13 +415,14 @@ export interface DoctorSelect<T extends boolean = true> {
  */
 export interface PacientesSelect<T extends boolean = true> {
   nombre?: T;
-  fotoPaciente?: T;
   apellido?: T;
   identidadPersonal?: T;
   genero?: T;
   fechaNacimiento?: T;
-  direccion?: T;
+  edad?: T;
   telefono?: T;
+  direccion?: T;
+  fotoPaciente?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

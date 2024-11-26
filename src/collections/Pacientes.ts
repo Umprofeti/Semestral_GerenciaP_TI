@@ -17,13 +17,6 @@ export const Pacientes: CollectionConfig = {
             required: true,
         },
         {
-            name: 'fotoPaciente',
-            type: 'upload',
-            label: 'Foto del paciente',
-            relationTo: 'media',
-            required: false,
-        },
-        {
             name: 'apellido',
             type: 'text',
             required: true,
@@ -41,17 +34,28 @@ export const Pacientes: CollectionConfig = {
                 {
                     label: 'Hombre',
                     value: 'Hombre'
-                }, {
+                },
+                {
                     label: 'Mujer',
                     value: 'Mujer'
                 }
             ],
-            defaultValue:'Mujer',
-            required:true
+            defaultValue: 'Mujer',
+            required: true,
         },
         {
             name: 'fechaNacimiento',
             type: 'date',
+            required: true,
+        },
+        {
+            name: 'edad',
+            type: 'number',
+            required: true,
+        },
+        {
+            name: 'telefono',
+            type: 'text',
             required: true,
         },
         {
@@ -60,9 +64,11 @@ export const Pacientes: CollectionConfig = {
             required: false,
         },
         {
-            name: 'telefono',
-            type: 'text',
-            required: true,
+            name: 'fotoPaciente',
+            type: 'upload',
+            label: 'Foto del paciente',
+            relationTo: 'media',
+            required: false,
         },
     ],
 };
