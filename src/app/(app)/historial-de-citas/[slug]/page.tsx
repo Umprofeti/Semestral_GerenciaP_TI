@@ -20,7 +20,6 @@ const HistorialDeCitas = async ({ params }: { params: { slug: string } }) => {
     },
   });
 
-  console.log(data);
 
   return (
     <div>
@@ -51,10 +50,11 @@ const HistorialDeCitas = async ({ params }: { params: { slug: string } }) => {
                           {cita.Doctor.especialidad.Nombre}, doctor/a: {cita.Doctor.nombreDoctor}
                         </div>
                         <div className="text-sm">
-                          Fecha: {new Date(cita.Fecha).toLocaleDateString('es-ES')}, Hora: {cita.Hora}
+                          Fecha: {new Date(cita.Fecha).toLocaleDateString('es-ES')},
+                          Hora: {new Date(cita.Hora).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
                         </div>
                         <div className="flex justify-center mt-2">
-                          <BotonCancelarCita idCita={cita.id}/>
+                          <BotonCancelarCita idCita={cita.id} />
                         </div>
                       </CardContent>
                     </Card>
@@ -81,7 +81,7 @@ const HistorialDeCitas = async ({ params }: { params: { slug: string } }) => {
                           {cita.Doctor.especialidad.Nombre}, doctor/a: {cita.Doctor.nombreDoctor}
                         </div>
                         <div className="text-sm">
-                          Fecha: {new Date(cita.Fecha).toLocaleDateString('es-ES')}, Hora: {cita.Hora}
+                          Fecha: {new Date(cita.Fecha).toLocaleDateString('es-ES')}, Hora: {new Date(cita.Hora).toLocaleDateString('es-ES')}
                         </div>
 
                       </CardContent>

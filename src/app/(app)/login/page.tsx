@@ -7,7 +7,6 @@ import Logo from '../public/doctor.svg'
 import Image from 'next/image'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
-import { useUserConext } from '../context/userContext'
 
 type Inputs = {
   email: string

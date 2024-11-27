@@ -1,17 +1,16 @@
 'use client'
 import MobileNavigation from "@/app/(app)/components/mobileNavigation";
-import Image from "next/image";
 import DesktopNavigation from "@/app/(app)/components/desktopNavigation";
 
-import { PencilLine } from "lucide-react";
 import InfoPaciente from "../../../components/infoPaciente";
 import InfoFotoPaciente from "../../../components/infoFotoPaciente";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
+
 const ProfUser = () => {
 
-    const { slug } = useParams()
+    const { slug } = useParams<{ slug: string }>()
     const [result, setResult] = useState<PacienteInformacion>();
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
@@ -33,7 +32,6 @@ const ProfUser = () => {
                 }
 
                 const res = await req.json()
-                console.log(res)
                 setResult(res)
                 setLoading(false)
             } catch (err: any) {

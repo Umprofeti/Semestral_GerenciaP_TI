@@ -4,6 +4,7 @@ import Image from "next/image";
 import { AvatarFallback, AvatarImage } from "./ui/avatar";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { UserIcon } from "lucide-react";
 
 const Header = () => {
     const [result, setResult] = useState(null);
@@ -26,14 +27,13 @@ const Header = () => {
           }
   
           const res = await req.json();
-          console.log(res)
           setResult({
             id: res.user.id,
             fotoPaciente: res.user.fotoPaciente.url,
             altFoto: res.user.fotoPaciente.alt,
           });
           setLoading(false);
-        } catch (err) {
+        } catch (err:any) {
           setError(err.message);
           setLoading(false);
         }
@@ -44,7 +44,6 @@ const Header = () => {
   
     return (
       <header className="flex items-center justify-between mb-4">
-        {/* Asegúrate de que el enlace solo se renderice si result.id está disponible */}
         <Link href={result && result.id ? `/dashboard/user/${result.id}` : '#'}>
           <Image
             src="/logo.svg"
@@ -55,7 +54,6 @@ const Header = () => {
           />
         </Link>
   
-        {/* Renderiza el avatar solo si result está disponible y no se está cargando */}
         {!loading && result ? (
           <Avatar className="w-20 h-20">
             <AvatarImage
@@ -66,10 +64,7 @@ const Header = () => {
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
         ) : (
-          <div className="w-20 h-20 flex items-center justify-center bg-gray-200 rounded-full">
-            {/* Placeholder mientras carga */}
-            Cargando...
-          </div>
+          <UserIcon className={`w-20 h-20 ${loading&&'animate-pulse'}`}/>
         )}
       </header>
     );

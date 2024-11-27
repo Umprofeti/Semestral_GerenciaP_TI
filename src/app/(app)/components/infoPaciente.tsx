@@ -1,14 +1,16 @@
 'use client'
 import { LoaderCircle, PencilLine } from "lucide-react";
-import { useParams } from "next/navigation";
 import React from "react";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 
 
-
-const InfoPaciente = ({infomacionExpe}) => {
-
+interface InfoPacienteProps {
+    infomacionExpe: string;
+  }
+  
+  const InfoPaciente: React.FC<InfoPacienteProps> = ({ infomacionExpe }) => {
+    
     const [result, setResult] = useState<InfoExpediente>();
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
@@ -33,7 +35,7 @@ const InfoPaciente = ({infomacionExpe}) => {
                 const data = await req.json();
                 setResult(data)
                 setLoading(false)
-            } catch (err) {
+            } catch (err:any) {
                 setError(err)
                 setLoading(false)
             }
@@ -50,7 +52,6 @@ const InfoPaciente = ({infomacionExpe}) => {
         }));
     };
 
-    // Update formData when result is updated
     useEffect(() => {
         if (result) {
             setFormData({
@@ -66,31 +67,29 @@ const InfoPaciente = ({infomacionExpe}) => {
         e.preventDefault();
         try {
             const responseEnvio = await fetch(
-              `http://localhost:3000/api/expedientes?where[paciente][equals]=${infomacionExpe}`,
-              {
-                method: 'PATCH', // Método HTTP
-                headers: {
-                  'Content-Type': 'application/json', // Tipo de contenido
-                  // Si necesitas autenticación, agrega aquí tu token:
-                  // 'Authorization': `Bearer ${yourToken}`
-                },
-                body: JSON.stringify(formData), // Convierte el objeto a JSON
-              }
+                `http://localhost:3000/api/expedientes?where[paciente][equals]=${infomacionExpe}`,
+                {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json', 
+                    },
+                    body: JSON.stringify(formData), 
+                }
             );
-        
+
             if (!responseEnvio.ok) {
-              // Si la respuesta no es exitosa
-              throw new Error(`Error ${responseEnvio.status}: ${responseEnvio.statusText}`);
+                // Si la respuesta no es exitosa
+                throw new Error(`Error ${responseEnvio.status}: ${responseEnvio.statusText}`);
             }
-        
-            const updatedData = await responseEnvio.json(); // Convierte la respuesta a JSON
+
+            const updatedData = await responseEnvio.json();
             console.log('Expediente actualizado:', updatedData);
             setIsEditing(false)
-            return updatedData; // Devuelve los datos actualizados
-          } catch (error) {
+            return updatedData; 
+        } catch (error) {
             console.error('Error al actualizar el expediente:', error);
-            throw error; // Re-lanza el error para manejarlo donde se use este método
-          }
+            throw error; 
+        }
 
     };
 
@@ -110,6 +109,7 @@ const InfoPaciente = ({infomacionExpe}) => {
                         <div className="flex justify-center">
                             <label htmlFor="sangre" className="w-1/2">Tipo sangre:</label>
                             <input type="text" id="sangre"
+                                required
                                 disabled={!isEditing}
                                 name="tipoSangre"
                                 // placeholder={formData.tipoSangre}
@@ -121,6 +121,7 @@ const InfoPaciente = ({infomacionExpe}) => {
                         <div className="flex justify-center">
                             <label htmlFor="alergia" className="w-1/2">Alergias:</label>
                             <input type="text" id="alergia"
+                                required
                                 disabled={!isEditing}
                                 name="alergia"
                                 value={formData.alergia}
@@ -132,6 +133,7 @@ const InfoPaciente = ({infomacionExpe}) => {
                         <div className="flex justify-center">
                             <label htmlFor="condiciones" className="w-1/2">Condiciones:</label>
                             <input type="text" id="condiciones"
+                                required
                                 disabled={!isEditing}
                                 name="condiciones"
                                 value={formData.condiciones}
@@ -143,6 +145,7 @@ const InfoPaciente = ({infomacionExpe}) => {
                         <div className="flex justify-center">
                             <label htmlFor="medicamentos" className="w-1/2">Medicamentos actuales:</label>
                             <input type="text" id="medicamentos"
+                                required
                                 disabled={!isEditing}
                                 name="medicamentos"
                                 placeholder={formData.medicamentos}
@@ -152,7 +155,7 @@ const InfoPaciente = ({infomacionExpe}) => {
                             />
                         </div>
                         <div className="flex justify-center gap-2">
-                            <Button className={`${!isEditing && 'hidden'} bg-red-500`} onClick={(e) => {e.preventDefault(); setIsEditing(!isEditing) }}>Cancelar</Button>
+                            <Button className={`${!isEditing && 'hidden'} bg-red-500`} onClick={(e) => { e.preventDefault(); setIsEditing(!isEditing) }}>Cancelar</Button>
                             <Button type="submit" className={`${!isEditing && 'hidden'} bg-[#76afa9]`}>Guardar</Button>
                         </div>
                     </form>

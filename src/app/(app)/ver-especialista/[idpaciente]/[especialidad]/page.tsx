@@ -135,7 +135,7 @@ const Especialidades = () => {
                               <li>Hora: {doctor.horario.desde} - {doctor.horario.hasta}</li>
                               <li>Horario: {doctor.diasDisponibles}</li>
                               <li>Costo: {doctor.costo}</li>
-                              <Link href={`/doctor-info/${doctor.id}`} className="font-semibold text-center w-full">Ver mas</Link>
+                              <Link href={`/doc-info/${idpaciente}/${doctor.id}`} className="font-semibold">Ver mas</Link>
                             </ul>
                           </div>
                         </CardContent>

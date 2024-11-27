@@ -1,6 +1,7 @@
 'use client'
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { Ban } from "lucide-react";
 
 const BotonCancelarCita = ({ idCita }: { idCita: string }) => {
 
@@ -31,10 +32,10 @@ const BotonCancelarCita = ({ idCita }: { idCita: string }) => {
             // variant="destructive"
             onClick={() => cancelarCita(idCita)}
             aria-label={`Cancelar cita con ID: ${idCita}`}
-            className={`bg-[#f0b2ae] w-full '}`}
+            className={`${!botonCancelado?'bg-[#f0b2ae]':'bg-[#000000]'} w-full `}
             disabled={botonCancelado}
         >
-            {botonCancelado?'Cita Cancelada':'Cancelar Cita'}
+            {botonCancelado?'Cita Cancelada':'Cancelar Cita'} {botonCancelado&&<Ban/>}
         </Button>
     );
 };

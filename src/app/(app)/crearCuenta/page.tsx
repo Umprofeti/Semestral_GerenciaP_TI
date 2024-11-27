@@ -5,7 +5,6 @@ import './crearCuenta.css'
 import Logo from '../public/doctor.svg'
 import Image from 'next/image'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { Users } from '../../../collections/Users'
 
 type Inputs = {
   name: string

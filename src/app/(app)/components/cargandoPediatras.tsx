@@ -5,7 +5,7 @@ import { CarouselItem } from "./ui/carousel";
 const CargandoPediatras = () => {
     return ( 
       <>
-        {Array.from({ length: 5 }).map((_, index) => (
+        {Array.from({ length: 4 }).map((_, index) => (
           <CarouselItem key={`cargandoPediatras-${index}`} className="pt-1 md:basis-1/4 ">
             <div className="p-1 ">
               <Card className="md:h-96 w-full">

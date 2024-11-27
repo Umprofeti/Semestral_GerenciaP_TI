@@ -12,8 +12,11 @@ import Link from "next/link";
 import { getPayload } from "payload";
 import configPromise from '@payload-config'
 
+interface IdPaciente {
+  idPaciente: string | string[] | undefined;
+}
 
-const CarouselEspecialidades =async ({idPaciente})=> {
+const CarouselEspecialidades: React.FC<IdPaciente> =async ({idPaciente})=> {
 
 
   const payload = await getPayload({ config: configPromise })

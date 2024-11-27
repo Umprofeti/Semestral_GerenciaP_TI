@@ -6,8 +6,12 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
+import { useParams } from 'next/navigation';
 
 const BusquedaDoctor = () => {
+
+    const { idpaciente } = useParams();
+
 
     const [busquedaInfo, setBusquedaInfo] = useState({
         nombreDoctor: ''
@@ -112,7 +116,7 @@ const BusquedaDoctor = () => {
                                             </div>
                                         </ul>
                                     </div>
-                                    <Link href={`/doctor-info/${doctor.id}`} className="w-[20%] font-semibold md:w-2/6 text-end pr-2">Ver mas</Link>
+                                    <Link href={`/doc-info/${idpaciente}/${doctor.id}`} className="w-[20%] font-semibold md:w-2/6 text-end pr-2">Ver mas</Link>
                                 </CardContent>
                             </Card>
                         )

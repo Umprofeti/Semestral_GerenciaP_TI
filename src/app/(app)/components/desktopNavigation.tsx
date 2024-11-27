@@ -1,7 +1,5 @@
 'use client'
-
 import BusquedaDoctor from "./busquedaDoctor";
-import { useUserConext } from "../context/userContext";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 

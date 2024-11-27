@@ -58,7 +58,7 @@ function CarouselMedicosDestacados({ doctors }: { doctors: any[] }) {
   const color = "bg-[#cce7e4]";
 
   return (
-    <div className="flex justify-center">
+    <div className="flex ">
       <Carousel className="w-full">
         <CarouselContent className="ml-0 flex">
           {doctors.map((doctor) => (

@@ -6,7 +6,7 @@ import { useState } from "react";
 const InfoFotoPaciente = ({ foto }) => {
     const [selectedImage, setSelectedImage] = useState(foto);
 
-    const handleImageChange = (event) => {
+    const handleImageChange = (event: { target: { files: any[]; }; }) => {
         const file = event.target.files[0];
         if (file) {
             const imageUrl = URL.createObjectURL(file);
