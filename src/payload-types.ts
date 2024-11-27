@@ -11,6 +11,7 @@ export interface Config {
     users: UserAuthOperations;
     doctor: DoctorAuthOperations;
     pacientes: PacienteAuthOperations;
+    administracion: AdministracionAuthOperations;
   };
   collections: {
     users: User;
@@ -20,6 +21,7 @@ export interface Config {
     pacientes: Paciente;
     citas: Cita;
     expedientes: Expediente;
+    administracion: Administracion;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -33,6 +35,7 @@ export interface Config {
     pacientes: PacientesSelect<false> | PacientesSelect<true>;
     citas: CitasSelect<false> | CitasSelect<true>;
     expedientes: ExpedientesSelect<false> | ExpedientesSelect<true>;
+    administracion: AdministracionSelect<false> | AdministracionSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -52,6 +55,9 @@ export interface Config {
       })
     | (Paciente & {
         collection: 'pacientes';
+      })
+    | (Administracion & {
+        collection: 'administracion';
       });
   jobs: {
     tasks: unknown;
@@ -95,6 +101,24 @@ export interface DoctorAuthOperations {
   };
 }
 export interface PacienteAuthOperations {
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
+}
+export interface AdministracionAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -244,6 +268,25 @@ export interface Expediente {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "administracion".
+ */
+export interface Administracion {
+  id: string;
+  nombre: string;
+  fotoAdministrador?: (string | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -276,6 +319,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'expedientes';
         value: string | Expediente;
+      } | null)
+    | ({
+        relationTo: 'administracion';
+        value: string | Administracion;
       } | null);
   globalSlug?: string | null;
   user:
@@ -290,6 +337,10 @@ export interface PayloadLockedDocument {
     | {
         relationTo: 'pacientes';
         value: string | Paciente;
+      }
+    | {
+        relationTo: 'administracion';
+        value: string | Administracion;
       };
   updatedAt: string;
   createdAt: string;
@@ -312,6 +363,10 @@ export interface PayloadPreference {
     | {
         relationTo: 'pacientes';
         value: string | Paciente;
+      }
+    | {
+        relationTo: 'administracion';
+        value: string | Administracion;
       };
   key?: string | null;
   value?:
@@ -458,6 +513,23 @@ export interface ExpedientesSelect<T extends boolean = true> {
   medicamentos?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "administracion_select".
+ */
+export interface AdministracionSelect<T extends boolean = true> {
+  nombre?: T;
+  fotoAdministrador?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

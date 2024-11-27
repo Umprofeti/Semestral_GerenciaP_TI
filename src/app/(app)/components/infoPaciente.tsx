@@ -7,10 +7,10 @@ import { Button } from "./ui/button";
 
 interface InfoPacienteProps {
     infomacionExpe: string;
-  }
-  
-  const InfoPaciente: React.FC<InfoPacienteProps> = ({ infomacionExpe }) => {
-    
+}
+
+const InfoPaciente: React.FC<InfoPacienteProps> = ({ infomacionExpe }) => {
+
     const [result, setResult] = useState<InfoExpediente>();
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
@@ -35,7 +35,7 @@ interface InfoPacienteProps {
                 const data = await req.json();
                 setResult(data)
                 setLoading(false)
-            } catch (err:any) {
+            } catch (err: any) {
                 setError(err)
                 setLoading(false)
             }
@@ -71,9 +71,9 @@ interface InfoPacienteProps {
                 {
                     method: 'PATCH',
                     headers: {
-                        'Content-Type': 'application/json', 
+                        'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(formData), 
+                    body: JSON.stringify(formData),
                 }
             );
 
@@ -85,10 +85,10 @@ interface InfoPacienteProps {
             const updatedData = await responseEnvio.json();
             console.log('Expediente actualizado:', updatedData);
             setIsEditing(false)
-            return updatedData; 
+            return updatedData;
         } catch (error) {
             console.error('Error al actualizar el expediente:', error);
-            throw error; 
+            throw error;
         }
 
     };

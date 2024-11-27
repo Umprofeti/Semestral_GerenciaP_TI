@@ -42,7 +42,7 @@ const Login = () => {
         body: JSON.stringify(data),
       })
 
-      const reqUser = await fetch(`http://localhost:3000/api/users/login`, {
+      const reqUser = await fetch(`http://localhost:3000/api/administracion/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ const Login = () => {
         console.log(res)
       } else if (reqUser.ok) {
         const res = await reqUser.json()
-        router.push(`/admin`)
+        router.push(`/dashboard/administracion/${res.user.id}`)
         console.log(res)
       } else {
         console.log('Error al iniciar sesion')

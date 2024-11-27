@@ -17,6 +17,7 @@ import {s3Adapter} from '@payloadcms/plugin-cloud-storage/s3'
 import {cloudStoragePlugin  } from '@payloadcms/plugin-cloud-storage'
 import {nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import {resendAdapter } from '@payloadcms/email-resend'
+import { Administracion } from './collections/Administracion'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -45,7 +46,7 @@ export default buildConfig({
     },
   },
 
-  collections: [Users, Media, Especialidad, Doctores, Pacientes, Citas, Expedientes],
+  collections: [Users, Media, Especialidad, Doctores, Pacientes, Citas, Expedientes,Administracion],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
