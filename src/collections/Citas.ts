@@ -7,7 +7,8 @@ export const Citas: CollectionConfig = {
     },
     access: {
         read: () => true,
-        create: () => true
+        create: () => true,
+        delete:()=>true
       },
     fields: [
         {
@@ -25,6 +26,13 @@ export const Citas: CollectionConfig = {
             required: true
         },
         {
+            name:'cancelado',
+            type:'checkbox',
+            label:'Cancelado?',
+            required:true,
+            defaultValue:false
+        },
+        {
             name:'Completado',
             type:'checkbox',
             defaultValue:false,
@@ -32,15 +40,21 @@ export const Citas: CollectionConfig = {
         },
         {
             name:'Hora',
-            type:'text',
+            type:'date',
+            label:'Hora de cita',
             required:true,
-            label:'Hora de cita'
+            admin: {
+                date: {
+                    pickerAppearance: 'timeOnly',
+                    displayFormat: 'h:mm aa',
+                }
+            }  
         },
         {
             name:'Fecha',
             type:'date',
+            label:'Fecha de la cita',
             required:true,
-            label:'Fecha de la cita'
         }
     ],
 };

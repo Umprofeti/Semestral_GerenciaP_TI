@@ -14,8 +14,8 @@ import MobileNavigation from "@/app/(app)/components/mobileNavigation";
 import { getPayload } from "payload";
 import configPromise from '@payload-config';
 
-export default async function Home() {
-  
+export default async function Home({ params }: { params: { userid: string } }) {
+  const { userid } = await params;
   // Obtener datos de los doctores desde Payload
   const payload = await getPayload({ config: configPromise });
   const data = await payload.find({
@@ -43,7 +43,7 @@ export default async function Home() {
 
       <div>
         <h2 className="m-3 text-xl md:text-2xl">Especialidades</h2>
-        <CarouselEspecialidades />
+        <CarouselEspecialidades idPaciente={userid}/>
       </div>
       <div>
         <h2 className="m-3 text-xl md:text-2xl">Médicos Destacados</h2>

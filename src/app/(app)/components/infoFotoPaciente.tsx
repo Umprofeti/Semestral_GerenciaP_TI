@@ -1,11 +1,9 @@
 'use client'
 import Image from "next/image";
-import { Button } from "./ui/button";
-import { useParams } from "next/navigation";
+
 import { useState } from "react";
 
 const InfoFotoPaciente = ({ foto }) => {
-    const { user } = useParams();
     const [selectedImage, setSelectedImage] = useState(foto);
 
     const handleImageChange = (event) => {

@@ -13,7 +13,8 @@ import { getPayload } from "payload";
 import configPromise from '@payload-config'
 
 
-const CarouselEspecialidades =async () => {
+const CarouselEspecialidades =async ({idPaciente})=> {
+
 
   const payload = await getPayload({ config: configPromise })
   const dataEspecialidad = await payload.find({
@@ -33,7 +34,7 @@ const CarouselEspecialidades =async () => {
           <CarouselContent className="-ml-8">
             {dataEspecialidad.docs.map((especialidad, index) => (
               <CarouselItem key={index} className="pl-8 basis-1/3 sm:basis-1/4 md:basis-1/6">
-                <Link href={`/ver-especialistas/${encodeURIComponent(especialidad.Nombre)}`}>
+                <Link href={`/ver-especialista/${idPaciente}/${encodeURIComponent(especialidad.Nombre)}`}>
                   <div>
                     <Card style={{ backgroundColor: `#${especialidad.Color}` }}>
                       {/* especialidad.Color */}

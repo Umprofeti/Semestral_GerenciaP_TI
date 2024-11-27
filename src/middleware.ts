@@ -4,14 +4,15 @@ import payload from 'payload'
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get('payload-token')?.value
-  console.log('token', token)
-
-  if (!token) return NextResponse.redirect(new URL('/login', req.url))
+  console.log(req)
+  if (!token) {
+    return NextResponse.redirect(new URL('/login', req.url))
+  }
 }
 
 export const config = {
   matcher: [
-    '/dashboard/:path*',
+    '/dashboard/user/:path*',
     '/doctor-info/:path*',
     '/especialidades/:path*',
     '/historial-de-citas/:path*',

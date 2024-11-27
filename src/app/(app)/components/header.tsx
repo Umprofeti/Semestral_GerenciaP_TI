@@ -1,34 +1,78 @@
+'use client'
 import { Avatar } from "@radix-ui/react-avatar";
 import Image from "next/image";
 import { AvatarFallback, AvatarImage } from "./ui/avatar";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Header = () => {
-
-  //Borrar
-  const idusuario = '674275b2304b0c977fbe1b48test'
-
-    return ( 
-    <header className="flex items-center justify-between mb-4">
-        <Link href={`/dashboard/user/${idusuario}`}>
+    const [result, setResult] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const req = await fetch(`http://localhost:3000/api/pacientes/me`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+  
+          if (!req.ok) {
+            console.log('Error al iniciar sesion');
+            return;
+          }
+  
+          const res = await req.json();
+          console.log(res)
+          setResult({
+            id: res.user.id,
+            fotoPaciente: res.user.fotoPaciente.url,
+            altFoto: res.user.fotoPaciente.alt,
+          });
+          setLoading(false);
+        } catch (err) {
+          setError(err.message);
+          setLoading(false);
+        }
+      };
+  
+      fetchData();
+    }, []);
+  
+    return (
+      <header className="flex items-center justify-between mb-4">
+        {/* Asegúrate de que el enlace solo se renderice si result.id está disponible */}
+        <Link href={result && result.id ? `/dashboard/user/${result.id}` : '#'}>
           <Image
-              src="/logo.svg"
-              alt="Logo"
-              width={64}
-              height={64}
-              className="object-contain"
+            src="/logo.svg"
+            alt="Logo"
+            width={64}
+            height={64}
+            className="object-contain"
           />
         </Link>
-        {/* Icono AlignJustify solo visible en dispositivos móviles */}
-        {/* <CircleUser size={70} color="#fff" className="md:hidden bg-[#b6e6e1] rounded-full" /> */}
   
-         {/* Imagen de perfil solo visible en dispositivos de escritorio */}
-         <Avatar className="w-20 h-20"> {/* Set size with Tailwind classes */}
-          <AvatarImage src="/profile.jpg" alt="@shadcn" className="object-cover rounded-full" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
+        {/* Renderiza el avatar solo si result está disponible y no se está cargando */}
+        {!loading && result ? (
+          <Avatar className="w-20 h-20">
+            <AvatarImage
+              src={result.fotoPaciente}
+              alt={result.altFoto || 'Foto de perfil'}
+              className="object-cover rounded-full"
+            />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        ) : (
+          <div className="w-20 h-20 flex items-center justify-center bg-gray-200 rounded-full">
+            {/* Placeholder mientras carga */}
+            Cargando...
+          </div>
+        )}
       </header>
-     );
-}
- 
-export default Header;
+    );
+  };
+  
+  export default Header;

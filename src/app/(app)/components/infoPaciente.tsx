@@ -7,8 +7,8 @@ import { Button } from "./ui/button";
 
 
 
-const InfoPaciente = () => {
-    const { user } = useParams()
+const InfoPaciente = ({infomacionExpe}) => {
+
     const [result, setResult] = useState<InfoExpediente>();
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
@@ -20,11 +20,10 @@ const InfoPaciente = () => {
         condiciones: "---",
         medicamentos: "---",
     });
-
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const req = await fetch(`http://localhost:3000/api/expedientes?where[paciente][equals]=${user}`, {
+                const req = await fetch(`http://localhost:3000/api/expedientes?where[paciente][equals]=${infomacionExpe}`, {
                     method: "GET",
                     credentials: "include",
                     headers: {
@@ -67,7 +66,7 @@ const InfoPaciente = () => {
         e.preventDefault();
         try {
             const responseEnvio = await fetch(
-              `http://localhost:3000/api/expedientes?where[paciente][equals]=${user}`,
+              `http://localhost:3000/api/expedientes?where[paciente][equals]=${infomacionExpe}`,
               {
                 method: 'PATCH', // Método HTTP
                 headers: {
@@ -94,7 +93,6 @@ const InfoPaciente = () => {
           }
 
     };
-
 
     return (
         <div className="mx-2 pb-12">

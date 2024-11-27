@@ -8,6 +8,7 @@ export const Doctores: CollectionConfig = {
     access: {
         read: () => true,
     },
+    auth: true,
     fields: [
         {
             name: 'nombreDoctor',
