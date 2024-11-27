@@ -5,18 +5,23 @@ import './crearCuenta.css'
 import Logo from '../public/doctor.svg'
 import Image from 'next/image'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { Users } from '../../../collections/Users'
+import { postLocalAPI } from '../utils/localAPI'
 
 type Inputs = {
-  name: string
-  lastName: string
-  userId: string
-  dateBirth: string
-  address: string
-  phoneNumber: string
-  email: string
-  password: string
-  passwornConfirm: string
-}
+  name: string;
+  lastName: string;
+  userId: string;
+  dateBirth: string;
+  address: string;
+  phoneNumber: string;
+  email: string;
+  password: string;
+  passwornConfirm: string;
+  edad: number;
+  gender: 'Hombre' | 'Mujer'; // Campo añadido para el género
+};
+
 
 const CrearCuenta = () => {
   const {
@@ -38,7 +43,7 @@ const CrearCuenta = () => {
         direccion: data.address,
       }
       console.log(dataPaciente)
-
+      postLocalAPI(dataPaciente)
       try {
         const req = await fetch(`http://localhost:3000/api/pacientes`, {
           method: 'POST',

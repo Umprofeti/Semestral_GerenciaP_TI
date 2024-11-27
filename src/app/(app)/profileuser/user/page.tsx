@@ -1,11 +1,9 @@
 import MobileNavigation from "@/app/(app)/components/mobileNavigation";
-import Image from "next/image";
 import DesktopNavigation from "@/app/(app)/components/desktopNavigation";
 import { getPayload } from "payload";
 import configPromise from '@payload-config'
-import { PencilLine } from "lucide-react";
-import InfoPaciente from "../../../components/infoPaciente";
-import InfoFotoPaciente from "../../../components/infoFotoPaciente";
+import InfoPaciente from "@/app/(app)/components/infoPaciente";
+import InfoFotoPaciente from "@/app/(app)/components/infoFotoPaciente";
 
 const ProfUser = async () => {
 
@@ -20,14 +18,6 @@ const ProfUser = async () => {
         }
     })
 
-    const dataExpediente = await payload.find({
-        collection: 'expedientes',
-        where: {
-            'paciente': {
-                equals: '674275b2304b0c977fbe1b48' // ID del paciente
-            }
-        }
-    });
 
     return (
         <div className="w-full h-screen flex flex-col">
@@ -66,7 +56,7 @@ const ProfUser = async () => {
                             <li>Fecha de nacimiento: {data.docs[0].fechaNacimiento}</li>
                             <li>Edad: 39 años</li>
                             <li>Teléfono: {data.docs[0].telefono}</li>
-                            <li>Correo Electrónico: {data.docs[0].email}</li>
+                            <li>Correo Electrónico: {data.docs[0].email}</li> 
                             <li>Dirección: {data.docs[0].direccion}</li>
                         </ul>
                     </div>

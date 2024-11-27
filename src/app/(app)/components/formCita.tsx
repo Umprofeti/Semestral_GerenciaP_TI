@@ -163,6 +163,7 @@ export default function FormCita() {
                         value={form.Hora?.split("T")[1]?.substring(0, 5) || "12:00"} // Valor predeterminado
                         onChange={handleChange}
                         required
+                        step="2"
                     />
                 </div>
                 <Button

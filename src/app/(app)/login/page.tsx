@@ -13,7 +13,6 @@ type Inputs = {
   password: string
 }
 
-
 const Login = () => {
 
 
@@ -23,7 +22,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>()
-  
+
   const router = useRouter()
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
