@@ -81,6 +81,7 @@ const BusquedaDoctor = () => {
                 <Input
                     placeholder="Search"
                     name='nombreDoctor'
+                    required
                     value={busquedaInfo.nombreDoctor}
                     onChange={handleChange}
                     className="pl-10 w-full text-lg" />

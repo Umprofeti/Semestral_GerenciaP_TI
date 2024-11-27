@@ -222,8 +222,7 @@ export interface Cita {
   id: string;
   Doctor: string | Doctor;
   Paciente: string | Paciente;
-  cancelado: boolean;
-  Completado?: boolean | null;
+  Estado: 'completado' | 'pendiente' | 'cancelado';
   Hora: string;
   Fecha: string;
   updatedAt: string;
@@ -441,8 +440,7 @@ export interface PacientesSelect<T extends boolean = true> {
 export interface CitasSelect<T extends boolean = true> {
   Doctor?: T;
   Paciente?: T;
-  cancelado?: T;
-  Completado?: T;
+  Estado?: T;
   Hora?: T;
   Fecha?: T;
   updatedAt?: T;

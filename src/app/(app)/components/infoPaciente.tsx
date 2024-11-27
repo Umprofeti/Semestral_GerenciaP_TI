@@ -112,7 +112,6 @@ interface InfoPacienteProps {
                                 required
                                 disabled={!isEditing}
                                 name="tipoSangre"
-                                // placeholder={formData.tipoSangre}
                                 value={formData.tipoSangre}
                                 onChange={handleChange}
                                 className={`w-1/2 appearance-none border-none bg-transparent mx-1 px-1 text-base text-black placeholder-black ${isEditing ? 'outline outline-1 rounded text-zinc-700 placeholder-zinc-700  ' : 'focus:outline-none'} focus:ring-0`}
@@ -125,7 +124,6 @@ interface InfoPacienteProps {
                                 disabled={!isEditing}
                                 name="alergia"
                                 value={formData.alergia}
-                                placeholder={formData.alergia}
                                 onChange={handleChange}
                                 className={`w-1/2 appearance-none border-none bg-transparent mx-1 px-1 text-base text-black placeholder-black ${isEditing ? 'outline outline-1 rounded text-zinc-700 placeholder-zinc-700  ' : 'focus:outline-none'} focus:ring-0`}
                             />
@@ -137,7 +135,6 @@ interface InfoPacienteProps {
                                 disabled={!isEditing}
                                 name="condiciones"
                                 value={formData.condiciones}
-                                placeholder={formData.tipoSangre}
                                 onChange={handleChange}
                                 className={`w-1/2 appearance-none border-none bg-transparent mx-1 px-1 text-base text-black placeholder-black ${isEditing ? 'outline outline-1 rounded text-zinc-700 placeholder-zinc-700  ' : 'focus:outline-none'} focus:ring-0`}
                             />
@@ -148,7 +145,6 @@ interface InfoPacienteProps {
                                 required
                                 disabled={!isEditing}
                                 name="medicamentos"
-                                placeholder={formData.medicamentos}
                                 value={formData.medicamentos}
                                 onChange={handleChange}
                                 className={`w-1/2 h-auto appearance-none border-none bg-transparent mx-1 px-1 text-base text-black placeholder-black ${isEditing ? 'outline outline-1 rounded text-zinc-700 placeholder-zinc-700  ' : 'focus:outline-none'} focus:ring-0`}

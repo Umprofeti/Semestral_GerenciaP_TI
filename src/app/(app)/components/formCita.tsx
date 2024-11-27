@@ -20,6 +20,7 @@ export default function FormCita() {
         Paciente: idpaciente || "",
         Hora: "12:00", 
         Fecha: new Date().toISOString().split("T")[0], 
+        Estado:"pendiente"
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +55,8 @@ export default function FormCita() {
         e.preventDefault();
 
         try {
-            setSubiendoInfo(true);
+            setSubiendoInfo(true); 
+            console.log(form)
             const responseEnvio = await fetch(`http://localhost:3000/api/citas`, {
                 method: "POST",
                 headers: {
@@ -85,6 +87,8 @@ export default function FormCita() {
             Paciente: idpaciente || "",
             Hora: "12:00",
             Fecha: new Date().toISOString().split("T")[0],
+            Estado:"pendiente"
+
         });
     }, [iddoctor, idpaciente]);
     

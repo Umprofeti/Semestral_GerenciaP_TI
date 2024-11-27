@@ -20,7 +20,7 @@ const HistorialDeCitas = async ({ params }: { params: { slug: string } }) => {
     },
   });
 
-
+  console.log(data)
   return (
     <div>
       <div className="h-[10vh] bg-[#89ccc5] flex justify-center items-center md:hidden">
@@ -39,7 +39,7 @@ const HistorialDeCitas = async ({ params }: { params: { slug: string } }) => {
               <h2 className="text-lg mb-2">Próximas</h2>
 
               {data.docs.map((cita, index) => {
-                if (!cita.Completado) {
+                if (cita.Estado ==='pendiente') {
                   return (
                     <Card
                       key={index}
@@ -70,7 +70,7 @@ const HistorialDeCitas = async ({ params }: { params: { slug: string } }) => {
             <div className="md:flex-1">
               <h2 className="text-lg mb-2">Finalizadas</h2>
               {data.docs.map((cita, index) => {
-                if (cita.Completado) {
+                if (cita.Estado ==='completado') {
                   return (
                     <Card
                       key={index}
