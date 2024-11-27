@@ -56,7 +56,7 @@ const Login = () => {
         console.log(res)
       } else if (reqDoctor.ok) {
         const res = await reqDoctor.json()
-        router.push(`/dashboard/doctor/${res.user.id}`)
+        router.push(`/dashboard/doctor`)
         console.log(res)
       } else if (reqUser.ok) {
         const res = await reqUser.json()
