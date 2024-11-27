@@ -14,17 +14,13 @@ type Inputs = {
   password: string
 }
 
-
 const Login = () => {
-
-
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>()
-  
+
   const router = useRouter()
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
@@ -42,9 +38,8 @@ const Login = () => {
       }
 
       const res = await req.json()
-      router.push(`/dashboard/user/${res.user.id}`);
+      router.push(`/dashboard/user/${res.user.id}`)
       console.log(res)
-
     } catch (error) {
       console.log('error', error)
     }
