@@ -13,6 +13,7 @@ import DesktopNavigation from "@/app/(app)/components/desktopNavigation";
 import MobileNavigation from "@/app/(app)/components/mobileNavigation";
 import { getPayload } from "payload";
 import configPromise from '@payload-config';
+import Saludo from "@/app/(app)/components/saludo";
 
 export default async function Home({ params }: { params: { userid: string } }) {
   const { userid } = await params;
@@ -31,9 +32,7 @@ export default async function Home({ params }: { params: { userid: string } }) {
     <div className="p-4 lg:pl-16 lg:pr-16 flex flex-col gap-4">
       <Header />
       <DesktopNavigation />
-      <h1 className="text-2xl sm:text-3xl">
-        Bienvenido, <span className="text-[#89ccc5] block sm:inline">Nombre Apellido</span>
-      </h1>
+      <Saludo/>
 
       {/* Mobile-only Search Bar */}
       <div className="relative md:hidden">

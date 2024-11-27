@@ -33,7 +33,7 @@ const Login = () => {
         },
         body: JSON.stringify(data),
       })
-
+      console.log(data)
       const reqDoctor = await fetch(`http://localhost:3000/api/doctor/login`, {
         method: 'POST',
         headers: {
