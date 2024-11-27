@@ -26,7 +26,7 @@ const Login = () => {
   const router = useRouter()
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      const req = await fetch(`http://localhost:3000/api/pacientes/login`, {
+      const reqPacientes = await fetch(`http://localhost:3000/api/pacientes/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,15 +34,38 @@ const Login = () => {
         body: JSON.stringify(data),
       })
 
-      if (!req.ok) {
+      const reqDoctor = await fetch(`http://localhost:3000/api/doctor/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      const reqUser = await fetch(`http://localhost:3000/api/users/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      if (reqPacientes.ok) {
+        const res = await reqPacientes.json()
+        router.push(`/dashboard/user/${res.user.id}`)
+        console.log(res)
+      } else if (reqDoctor.ok) {
+        const res = await reqDoctor.json()
+        router.push(`/dashboard/doctor/${res.user.id}`)
+        console.log(res)
+      } else if (reqUser.ok) {
+        const res = await reqUser.json()
+        router.push(`/admin`)
+        console.log(res)
+      } else {
         console.log('Error al iniciar sesion')
         return
       }
-
-      const res = await req.json()
-      router.push(`/dashboard/user/${res.user.id}`);
-      console.log(res)
-
     } catch (error) {
       console.log('error', error)
     }
