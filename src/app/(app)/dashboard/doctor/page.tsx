@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import { 
@@ -42,7 +42,10 @@ const CitasDelDia = () => {
         },
       });
       const citasData = await responseCitas.json();
-      setCitas(citasData.docs.filter((cita: any) => cita.Doctor.id === doctorData?.id));
+      const filteredCitas = citasData.docs.filter(
+        (cita: any) => cita.Estado === 'pendiente' && cita.Doctor.id === doctorData?.id
+      );
+      setCitas(filteredCitas);
 
       const responseExpedientes = await fetch('http://localhost:3000/api/expedientes', {
         credentials: "include",
@@ -55,14 +58,33 @@ const CitasDelDia = () => {
       setExpedientes(expedientesData.docs);
     };
 
-    if (doctorData) {
-      fetchCitasYExpedientes();
-    } else {
+    if (!doctorData) {
       fetchDoctorData();
+    } else {
+      fetchCitasYExpedientes();
     }
   }, [doctorData]);
 
-  if (!doctorData || !citas.length) {
+  const finalizarCita = async (citaId: string) => {
+    const response = await fetch(`http://localhost:3000/api/citas/${citaId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        Estado: 'completado',
+      }),
+    });
+
+    if (response.ok) {
+      // Filtrar las citas con estado pendiente
+      setCitas((prevCitas) => prevCitas.filter((cita) => cita.id !== citaId));
+    } else {
+      console.error('Error al finalizar la cita');
+    }
+  };
+
+  if (!doctorData) {
     return <p>Cargando...</p>;
   }
 
@@ -86,7 +108,7 @@ const CitasDelDia = () => {
             </TableHeader>
             <TableBody>
               {citas.map((cita) => {
-                const paciente = cita.Paciente as Paciente
+                const paciente = cita.Paciente as Paciente;
                 const citaHora = new Date(cita.Hora).toLocaleTimeString([], {
                   hour: '2-digit',
                   minute: '2-digit',
@@ -97,7 +119,7 @@ const CitasDelDia = () => {
                   day: '2-digit',
                   year: 'numeric',
                 });
-                
+
                 const expediente = expedientes.find(
                   (expediente) => (expediente.paciente as Paciente).id === paciente.id
                 );
@@ -107,14 +129,9 @@ const CitasDelDia = () => {
                     <TableCell className="text-black text-xs sm:text-base">
                       {paciente.nombre} {paciente.apellido}
                     </TableCell>
-                    <TableCell className="text-black text-xs sm:text-base">
-                      {citaHora}
-                    </TableCell>
-                    <TableCell className="text-black text-xs sm:text-base">
-                      {citaFecha}
-                    </TableCell>
+                    <TableCell className="text-black text-xs sm:text-base">{citaHora}</TableCell>
+                    <TableCell className="text-black text-xs sm:text-base">{citaFecha}</TableCell>
                     <TableCell className="text-right text-xs sm:text-base">
-                      {/* Expediente Dialog */}
                       <Dialog>
                         <DialogTrigger asChild>
                           <Button 
@@ -128,7 +145,7 @@ const CitasDelDia = () => {
                           <DialogHeader>
                             <DialogTitle className="text-black">Expediente</DialogTitle>
                             <DialogDescription>
-                              Expediente medico y datos personales del paciente.
+                              Expediente médico y datos personales del paciente.
                             </DialogDescription>
                           </DialogHeader>
                           <div className="grid gap-4 py-4">
@@ -159,10 +176,10 @@ const CitasDelDia = () => {
                           </DialogFooter>
                         </DialogContent>
                       </Dialog>
-
                       <Button 
                         className="bg-[#f2b0b0] text-xs px-3 py-1 rounded hover:bg-[#f2b0b0]/85 md:text-sm md:ml-4"
                         variant="outline"
+                        onClick={() => finalizarCita(cita.id)}
                       >
                         Finalizar cita
                       </Button>
