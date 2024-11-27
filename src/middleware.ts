@@ -31,6 +31,5 @@ export const config = {
     '/historial-de-citas/:path*',
     '/profileuser/:path*',
     '/ver-especialistas/:path*',
-    '/admin',
   ],
 }

@@ -8,7 +8,7 @@ export const Citas: CollectionConfig = {
     access: {
         read: () => true,
         create: () => true,
-        delete:()=>true
+        update:()=>true
       },
     fields: [
         {
@@ -26,17 +26,24 @@ export const Citas: CollectionConfig = {
             required: true
         },
         {
-            name:'cancelado',
-            type:'checkbox',
-            label:'Cancelado?',
-            required:true,
-            defaultValue:false
-        },
-        {
-            name:'Completado',
-            type:'checkbox',
-            defaultValue:false,
-            label:'¿Cita culminada?'
+            name:'Estado',
+            type:'select',
+            options: [
+                {
+                    label: 'Completado',
+                    value: 'completado'
+                },
+                {
+                    label: 'Pendiente',
+                    value: 'pendiente'
+                },
+                {
+                    label: 'Cancelado',
+                    value: 'cancelado'
+                },
+            ],
+            defaultValue: 'Pendiente',
+            required: true,
         },
         {
             name:'Hora',
