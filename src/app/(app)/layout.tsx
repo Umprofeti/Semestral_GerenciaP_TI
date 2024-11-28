@@ -17,7 +17,7 @@ export default function RootLayout({
 
   return (
     <html lang="es">
-      <body className="antialiased flex flex-col min-h-screen pb-20 md:pb-0"> {/* `pb-20` solo en móviles (debajo de `md`) */}
+      <body className="bg-[#f4f7f7] antialiased flex flex-col min-h-screen pb-20 md:pb-0"> {/* `pb-20` solo en móviles (debajo de `md`) */}
         <main className="flex-grow">
           {children}
         </main>
