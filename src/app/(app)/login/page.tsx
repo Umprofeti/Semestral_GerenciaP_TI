@@ -23,7 +23,7 @@ const Login = () => {
   const router = useRouter()
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      const reqPacientes = await fetch(`http://localhost:3000/api/pacientes/login`, {
+      const reqPacientes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/pacientes/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ const Login = () => {
         body: JSON.stringify(data),
       })
       console.log(data)
-      const reqDoctor = await fetch(`http://localhost:3000/api/doctor/login`, {
+      const reqDoctor = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/doctor/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ const Login = () => {
         body: JSON.stringify(data),
       })
 
-      const reqUser = await fetch(`http://localhost:3000/api/administracion/login`, {
+      const reqUser = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/administracion/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

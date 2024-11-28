@@ -11,7 +11,7 @@ const ExpedienteAdministracion = ({ idPaciente,visibleButton }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const req = await fetch(`http://localhost:3000/api/expedientes?where[paciente][equals]=${idPaciente}`, {
+                const req = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/expedientes?where[paciente][equals]=${idPaciente}`, {
                     method: "GET",
                     credentials: "include",
                     headers: {

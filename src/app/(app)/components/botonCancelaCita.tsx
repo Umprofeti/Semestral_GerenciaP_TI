@@ -9,7 +9,7 @@ const BotonCancelarCita = ({ idCita }: { idCita: string }) => {
 
     const cancelarCita = async (id: string) => {
         try {
-            const req = await fetch(`http://localhost:3000/api/citas?where[id][equals]=${id}`, {
+            const req = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/citas?where[id][equals]=${id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

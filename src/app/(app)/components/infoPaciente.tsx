@@ -26,7 +26,7 @@ const InfoPaciente: React.FC<InfoPacienteProps> = ({ infomacionExpe }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const req = await fetch(`http://localhost:3000/api/expedientes?where[paciente][equals]=${infomacionExpe}`, {
+                const req = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/expedientes?where[paciente][equals]=${infomacionExpe}`, {
                     method: "GET",
                     credentials: "include",
                     headers: {
@@ -72,7 +72,7 @@ const InfoPaciente: React.FC<InfoPacienteProps> = ({ infomacionExpe }) => {
 
             try {
                 const responseEnvio = await fetch(
-                    `http://localhost:3000/api/expedientes?where[paciente][equals]=${infomacionExpe}`,
+                    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/expedientes?where[paciente][equals]=${infomacionExpe}`,
                     {
                         method: 'PATCH',
                         headers: {

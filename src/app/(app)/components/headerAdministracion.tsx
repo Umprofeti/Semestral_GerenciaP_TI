@@ -30,7 +30,7 @@ const HeaderAdministracion = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const req = await fetch(`http://localhost:3000/api/administracion/me`, {
+                const req = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/administracion/me`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

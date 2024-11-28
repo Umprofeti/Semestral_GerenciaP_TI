@@ -21,7 +21,7 @@ const CitasDelDia = () => {
   useEffect(() => {
     // Obtener datos del doctor
     const fetchDoctorData = async () => {
-      const response = await fetch('http://localhost:3000/api/doctor/me', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/doctor/me`, {
         credentials: "include",
         method: 'GET',
         headers: {
@@ -34,7 +34,7 @@ const CitasDelDia = () => {
 
     // Obtener citas y expedientes
     const fetchCitasYExpedientes = async () => {
-      const responseCitas = await fetch('http://localhost:3000/api/citas', {
+      const responseCitas = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/citas`, {
         credentials: "include",
         method: 'GET',
         headers: {
@@ -47,7 +47,7 @@ const CitasDelDia = () => {
       );
       setCitas(filteredCitas);
 
-      const responseExpedientes = await fetch('http://localhost:3000/api/expedientes', {
+      const responseExpedientes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/expedientes`, {
         credentials: "include",
         method: 'GET',
         headers: {
@@ -66,7 +66,7 @@ const CitasDelDia = () => {
   }, [doctorData]);
 
   const finalizarCita = async (citaId: string) => {
-    const response = await fetch(`http://localhost:3000/api/citas/${citaId}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/citas/${citaId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

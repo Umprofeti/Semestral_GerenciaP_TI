@@ -68,7 +68,7 @@ export default function FormCita() {
             try {
                 setSubiendoInfo(true);
                 console.log(form)
-                const responseEnvio = await fetch(`http://localhost:3000/api/citas`, {
+                const responseEnvio = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/citas`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -102,7 +102,7 @@ export default function FormCita() {
         const fetchData = async () => {
 
             try {
-                const req = await fetch(`http://localhost:3000/api/pacientes?where[id][equals]=${idpaciente}`, {
+                const req = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/pacientes?where[id][equals]=${idpaciente}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

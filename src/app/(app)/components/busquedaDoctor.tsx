@@ -39,7 +39,7 @@ const BusquedaDoctor = () => {
         setBusquedaCard(true)
         setLoading(true)
         try {
-            const req = await fetch(`http://localhost:3000/api/doctor?where[nombreDoctor][equals]=${busquedaInfo.nombreDoctor}`, {
+            const req = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/doctor?where[nombreDoctor][equals]=${busquedaInfo.nombreDoctor}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

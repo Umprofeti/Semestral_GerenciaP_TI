@@ -14,7 +14,7 @@ const Header = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const req = await fetch(`http://localhost:3000/api/pacientes/me`, {
+          const req = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/pacientes/me`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',

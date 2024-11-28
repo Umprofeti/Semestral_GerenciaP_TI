@@ -61,7 +61,7 @@ const CrearCuenta = () => {
         console.log(dataPaciente)
         postLocalAPI(dataPaciente)
         try {
-          const req = await fetch(`http://localhost:3000/api/pacientes`, {
+          const req = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/pacientes`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

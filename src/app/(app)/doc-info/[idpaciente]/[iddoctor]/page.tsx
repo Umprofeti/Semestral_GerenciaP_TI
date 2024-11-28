@@ -23,7 +23,7 @@ const DoctorInfo = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const req = await fetch(`http://localhost:3000/api/doctor?where[id][equals]=${iddoctor}`, {
+        const req = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/doctor?where[id][equals]=${iddoctor}`, {
           method: "GET",
           credentials: "include",
           headers: {
