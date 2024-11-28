@@ -33,6 +33,12 @@ const CarouselCitasProgramadas = () => {
     const [error, setError] = useState('');
     const [expedienteVisible, setExpedienteVisible] = useState<number | null>(null);
 
+    const estadoClases: { [key: string]: string } = {
+        pendiente: 'bg-[#f0e3a2]',
+        cancelado: 'bg-[#f2b0b0]',
+        completado: 'bg-green-300',
+    };
+
     const toggleExpediente = (index: number) => {
         setExpedienteVisible(expedienteVisible === index ? null : index); // Muestra u oculta el expediente correspondiente
     };
@@ -52,6 +58,7 @@ const CarouselCitasProgramadas = () => {
                 }
 
                 const res = await req.json();
+                console.log(res)
                 setResult(res);
                 setLoading(false);
             } catch (err: any) {
@@ -78,8 +85,8 @@ const CarouselCitasProgramadas = () => {
                                 </ul>
                             </div>
                             <div className="md:w-2/6 py-4 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-6">
-                                <p className={`${result?.docs[0].Estado === 'pendiente' ? 'bg-[#f0e3a2]' : 'bg-[#f2b0b0]'} py-3 px-8 rounded-lg text-black shadow-sm`}>
-                                    {!loading && result ? cita.Estado : 'Consultando...'}
+                                <p className={`${estadoClases[cita.Estado] || 'bg-gray-200'} py-3 px-8 rounded-lg text-black shadow-sm`}>
+                                    {!loading && result ? cita.Estado : 'Verificando...'}
                                 </p>
                                 <Button
                                     className="bg-[#89ccc5] shadow-sm px-8 py-2"
@@ -91,9 +98,10 @@ const CarouselCitasProgramadas = () => {
                         </div>
                         <div className="md:w-2/6">
                             {!loading && result && (
+                                cita.Paciente.expediente&&
                                 <ExpedienteAdministracion
                                     idExpediente={cita.Paciente.expediente}
-                                    visibleButton={expedienteVisible === index} // Muestra el expediente solo si coincide con el índice actual
+                                    visibleButton={expedienteVisible === index} 
                                 />
                             )}
                         </div>

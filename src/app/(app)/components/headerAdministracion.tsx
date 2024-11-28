@@ -43,7 +43,6 @@ const HeaderAdministracion = () => {
                 }
 
                 const res = await req.json();
-                console.log('panel', res);
                 setResult(res);
                 setLoading(false);
             } catch (err:any) {

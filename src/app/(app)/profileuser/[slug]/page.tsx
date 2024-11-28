@@ -6,6 +6,7 @@ import Link from "next/link";
 import DesktopNavigation from "@/app/(app)/components/desktopNavigation";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { UserCircle } from "lucide-react";
 
 const ProfileUser = () => {
     const router = useRouter()
@@ -29,7 +30,6 @@ const ProfileUser = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-
             try {
                 const req = await fetch(`http://localhost:3000/api/pacientes?where[id][equals]=${slug}`, {
                     method: 'GET',
@@ -74,6 +74,7 @@ const ProfileUser = () => {
                 <div className="relative">
                     <div className="absolute flex bg-white justify-center w-48 md:w-64 h-48 md:h-64 overflow-hidden -top-28 md:-top-36 left-1/2 md:left-20 transform -translate-x-1/2 md:-translate-x-0 border-white md:border-[#89ccc5] border-8 rounded-full z-10">
                         {!loading && result &&
+                            result?.docs[0].fotoPaciente && result?.docs[0].fotoPaciente ?
 
                             <Image
                                 src={result?.docs[0]?.fotoPaciente?.url}
@@ -82,6 +83,8 @@ const ProfileUser = () => {
                                 alt={result?.docs[0].fotoPaciente.alt}
                                 className="object-cover w-full"
                             />
+                            :
+                            <UserCircle className="w-full h-full object-cover" />
                         }
                     </div>
                 </div>

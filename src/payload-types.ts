@@ -259,7 +259,7 @@ export interface Cita {
 export interface Expediente {
   id: string;
   paciente: string | Paciente;
-  tiposangre: 'O+' | 'O-' | 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-';
+  tiposangre: '---' | 'O+' | 'O-' | 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-';
   alergia?: string | null;
   condiciones?: string | null;
   medicamentos?: string | null;

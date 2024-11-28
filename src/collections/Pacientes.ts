@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
 export const Pacientes: CollectionConfig = {
     slug: 'pacientes',
@@ -9,8 +9,8 @@ export const Pacientes: CollectionConfig = {
     access: {
         read: () => true,
         create: () => true,
-        update:()=>true,
-        delete:()=>true
+        update: () => true,
+        delete: () => true,
     },
     fields: [
         {
@@ -35,12 +35,12 @@ export const Pacientes: CollectionConfig = {
             options: [
                 {
                     label: 'Hombre',
-                    value: 'Hombre'
+                    value: 'Hombre',
                 },
                 {
                     label: 'Mujer',
-                    value: 'Mujer'
-                }
+                    value: 'Mujer',
+                },
             ],
             defaultValue: 'Mujer',
             required: true,
@@ -73,4 +73,23 @@ export const Pacientes: CollectionConfig = {
             required: false,
         },
     ],
+    hooks: {
+        afterChange: [
+            async ({ doc, req, operation }) => {
+                if (operation === 'create') {
+                    await req.payload.create({
+                        collection: 'expedientes',
+                        data: {
+                            paciente: doc.id,
+                            tiposangre: '---', // Puedes definir un valor predeterminado aquí.
+                            alergia: '---',
+                            condiciones: '---',
+                            medicamentos: '---',
+                        },
+                        overrideAccess: true,
+                    });
+                }
+            },
+        ],
+    },
 };

@@ -22,6 +22,10 @@ export const Expedientes: CollectionConfig = {
             type: 'select',
             options: [
                 {
+                    label: '---',
+                    value: '---'
+                },
+                {
                     label: 'O+',
                     value: 'O+'
                 },

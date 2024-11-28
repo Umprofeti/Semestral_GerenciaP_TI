@@ -17,7 +17,8 @@ const InfoPaciente: React.FC<InfoPacienteProps> = ({ infomacionExpe }) => {
     const [isEditing, setIsEditing] = useState(false)
 
     const [formData, setFormData] = useState({
-        tipoSangre: "---",
+        paciente:infomacionExpe,
+        tiposangre: "---",
         alergia: "---",
         condiciones: "---",
         medicamentos: "---",
@@ -33,6 +34,7 @@ const InfoPaciente: React.FC<InfoPacienteProps> = ({ infomacionExpe }) => {
                     },
                 });
                 const data = await req.json();
+                console.log('Data extraida', data)
                 setResult(data)
                 setLoading(false)
             } catch (err: any) {
@@ -55,41 +57,45 @@ const InfoPaciente: React.FC<InfoPacienteProps> = ({ infomacionExpe }) => {
     useEffect(() => {
         if (result) {
             setFormData({
-                tipoSangre: result.docs[0]?.tiposangre || "---",
+                paciente:infomacionExpe || "",
+                tiposangre: result.docs[0]?.tiposangre || "---",
                 alergia: result.docs[0]?.alergia || "---",
                 condiciones: result.docs[0]?.condiciones || "---",
                 medicamentos: result.docs[0]?.medicamentos || "---",
             });
         }
-    }, [result]);
+    }, [result, infomacionExpe]);
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        try {
-            const responseEnvio = await fetch(
-                `http://localhost:3000/api/expedientes?where[paciente][equals]=${infomacionExpe}`,
-                {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData),
+
+
+            try {
+                const responseEnvio = await fetch(
+                    `http://localhost:3000/api/expedientes?where[paciente][equals]=${infomacionExpe}`,
+                    {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData),
+                    }
+                );
+
+                if (!responseEnvio.ok) {
+                    // Si la respuesta no es exitosa
+                    throw new Error(`Error ${responseEnvio.status}: ${responseEnvio.statusText}`);
                 }
-            );
 
-            if (!responseEnvio.ok) {
-                // Si la respuesta no es exitosa
-                throw new Error(`Error ${responseEnvio.status}: ${responseEnvio.statusText}`);
+                const updatedData = await responseEnvio.json();
+                console.log('Expediente actualizado:', updatedData);
+                setIsEditing(false)
+                return updatedData;
+            } catch (error) {
+                console.error('Error al actualizar el expediente:', error);
+                throw error;
             }
-
-            const updatedData = await responseEnvio.json();
-            console.log('Expediente actualizado:', updatedData);
-            setIsEditing(false)
-            return updatedData;
-        } catch (error) {
-            console.error('Error al actualizar el expediente:', error);
-            throw error;
-        }
+        
 
     };
 
@@ -111,8 +117,8 @@ const InfoPaciente: React.FC<InfoPacienteProps> = ({ infomacionExpe }) => {
                             <input type="text" id="sangre"
                                 required
                                 disabled={!isEditing}
-                                name="tipoSangre"
-                                value={formData.tipoSangre}
+                                name="tiposangre"
+                                value={formData.tiposangre}
                                 onChange={handleChange}
                                 className={`w-1/2 appearance-none border-none bg-transparent mx-1 px-1 text-base text-black placeholder-black ${isEditing ? 'outline outline-1 rounded text-zinc-700 placeholder-zinc-700  ' : 'focus:outline-none'} focus:ring-0`}
                             />

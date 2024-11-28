@@ -2,9 +2,6 @@ import CarouselCitasProgramadas from "@/app/(app)/components/carouselCitasProgra
 import HeaderAdministracion from "@/app/(app)/components/headerAdministracion";
 
 
-
-
-
 const Administracion = () => {
 
 

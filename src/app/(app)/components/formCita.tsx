@@ -18,30 +18,33 @@ export default function FormCita() {
         Completado: false,
         Doctor: iddoctor || "",
         Paciente: idpaciente || "",
-        Hora: "12:00", 
-        Fecha: new Date().toISOString().split("T")[0], 
-        Estado:"pendiente"
+        Hora: new Date().toISOString(),
+        Fecha: new Date().toISOString().split("T")[0],
+        Estado: "pendiente"
     });
 
+    const [horaTemporal, setHoraTemporal] = useState<string>('00:00:00')
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-    
-        if (name === "Fecha") {
+        console.log(value)
+        if (name === "Hora") {
+            //Se establece hora temporal que sera para el input
+            setHoraTemporal(value)
+
+            const [hours, minutes, seconds] = value.split(':');
+            const year = 2024;
+            const month = 11;
+            const day = 27;
+            const horas = parseInt(hours, 10);
+            const minutos = parseInt(minutes, 10);
+            const segundos = parseInt(seconds, 10);
+            const date = new Date(Date.UTC(year, month - 1, day, horas, minutos, segundos));
+            const isoString = date.toISOString();
             setForm((prev) => ({
                 ...prev,
-                [name]: value || new Date().toISOString().split("T")[0], 
+                [name]: isoString,
             }));
-        } else if (name === "Hora") {
-            if (form.Fecha) {
-                const [hours, minutes] = value.split(":");
-                const fechaISO = new Date(form.Fecha);
-                fechaISO.setHours(parseInt(hours, 10), parseInt(minutes, 10));
-    
-                setForm((prev) => ({
-                    ...prev,
-                    Hora: fechaISO.toISOString(),
-                }));
-            }
+
         } else {
             setForm((prev) => ({
                 ...prev,
@@ -49,49 +52,50 @@ export default function FormCita() {
             }));
         }
     };
-    
+
+    const verificarFecha = (fechaVerificar: string) => {
+        const [dia, mes, anio] = fechaVerificar.split('-').map(num => parseInt(num, 10));
+        const fechaHoy = new Date();
+        const fechaVerificarObj = new Date(dia, mes - 1, anio);
+        return fechaVerificarObj > fechaHoy;
+    };
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        try {
-            setSubiendoInfo(true); 
-            console.log(form)
-            const responseEnvio = await fetch(`http://localhost:3000/api/citas`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(form),
-            });
 
-            if (!responseEnvio.ok) {
-                throw new Error(`Error ${responseEnvio.status}: ${responseEnvio.statusText}`);
+        if (verificarFecha(form.Fecha)) {
+            try {
+                setSubiendoInfo(true);
+                console.log(form)
+                const responseEnvio = await fetch(`http://localhost:3000/api/citas`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(form),
+                });
+
+                if (!responseEnvio.ok) {
+                    throw new Error(`Error ${responseEnvio.status}: ${responseEnvio.statusText}`);
+                }
+
+                const updatedData = await responseEnvio.json();
+
+                setSubiendoInfo(false);
+                return updatedData;
+            } catch (error) {
+                console.error("Error al guardar la cita:", error);
+                setSubiendoInfo(false);
+                throw error;
             }
-
-            const updatedData = await responseEnvio.json();
-
-            setSubiendoInfo(false);
-            return updatedData;
-        } catch (error) {
-            console.error("Error al guardar la cita:", error);
-            setSubiendoInfo(false);
-            throw error;
+        } else {
+            alert('Fecha no permitida')
         }
     };
 
-    useEffect(() => {
-        setForm({
-            Completado: false,
-            Doctor: iddoctor || "",
-            Paciente: idpaciente || "",
-            Hora: "12:00",
-            Fecha: new Date().toISOString().split("T")[0],
-            Estado:"pendiente"
 
-        });
-    }, [iddoctor, idpaciente]);
-    
 
 
 
@@ -164,7 +168,7 @@ export default function FormCita() {
                         id="Hora"
                         name="Hora"
                         type="time"
-                        value={form.Hora?.split("T")[1]?.substring(0, 5) || "12:00"} // Valor predeterminado
+                        value={horaTemporal} // Valor predeterminado
                         onChange={handleChange}
                         required
                         step="2"

@@ -25,11 +25,7 @@ const DesktopNavigation = () => {
                 }
   
                 const res = await req.json()
-                setResult({
-                  id:res.user.id,
-                  fotoPaciente:res.user.fotoPaciente.url,
-                  altFoto: res.user.fotoPaciente.alt
-                })
+                setResult(res)
                 setLoading(false)
             } catch (err: any) {
                 setError(err)
@@ -38,21 +34,25 @@ const DesktopNavigation = () => {
         };
   
         fetchData();
+
+
     }, []);
-  
+
+    if(result){console.log('resultado cargados',result)}
+
     return (
         <div>
             <div className="relative bg-[#89ccc5] p-2 rounded-lg items-center justify-between hidden md:flex">
                 <BusquedaDoctor />
                 {/* Navigation Links */}
                 <div className="flex gap-6 ml-4 w-full justify-end">
-                    <Link href={`/dashboard/user/${!loading && result && result.id}`} className="text-white hover:underline text-lg flex-grow text-center">
+                    <Link href={`/dashboard/user/${!loading && result && result.user.id}`} className="text-white hover:underline text-lg flex-grow text-center">
                         Inicio
                     </Link>
-                    <Link href={`/historial-de-citas/${!loading && result && result.id}`} className="text-white hover:underline text-lg flex-grow text-center">
+                    <Link href={`/historial-de-citas/${!loading && result && result.user.id}`} className="text-white hover:underline text-lg flex-grow text-center">
                         Historial de citas
                     </Link>
-                    <Link href={`/profileuser/${!loading && result && result.id}`} className="text-white hover:underline text-lg flex-grow text-center">
+                    <Link href={`/profileuser/${!loading && result && result.user.id}`} className="text-white hover:underline text-lg flex-grow text-center">
                         Perfil
                     </Link>
                 </div>
