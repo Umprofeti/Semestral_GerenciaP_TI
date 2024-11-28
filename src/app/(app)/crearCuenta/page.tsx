@@ -56,7 +56,7 @@ const CrearCuenta = () => {
           telefono: data.phoneNumber,
           direccion: data.address,
           genero: data.genero,
-          edad:age
+          edad: age
         }
         console.log(dataPaciente)
         postLocalAPI(dataPaciente)
@@ -70,16 +70,16 @@ const CrearCuenta = () => {
           })
 
           const res = await req.json()
+          router.push("/login")
         } catch (error) {
           console.log(error)
         }
       } else {
-        alert('confirma correctamente la contraseña por favor')
+        alert('Verifique su fecha de naciemiento')
       }
     } else {
-      alert('Verifique su fecha de naciemiento')
+      alert('confirma correctamente la contraseña por favor')
     }
-
   }
 
   return (

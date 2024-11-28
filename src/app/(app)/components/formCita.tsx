@@ -26,7 +26,6 @@ export default function FormCita() {
     const [horaTemporal, setHoraTemporal] = useState<string>('00:00:00')
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        console.log(value)
         if (name === "Hora") {
             //Se establece hora temporal que sera para el input
             setHoraTemporal(value)

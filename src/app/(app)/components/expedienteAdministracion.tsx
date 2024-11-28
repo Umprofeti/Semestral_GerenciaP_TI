@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-const ExpedienteAdministracion = ({ idExpediente,visibleButton }) => {
-
+const ExpedienteAdministracion = ({ idPaciente,visibleButton }) => {
+    console.log(idPaciente)
     const [result, setResult] = useState<InfoExpediente>();
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
@@ -11,7 +11,7 @@ const ExpedienteAdministracion = ({ idExpediente,visibleButton }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const req = await fetch(`http://localhost:3000/api/expedientes?where[id][equals]=${idExpediente}`, {
+                const req = await fetch(`http://localhost:3000/api/expedientes?where[paciente][equals]=${idPaciente}`, {
                     method: "GET",
                     credentials: "include",
                     headers: {
@@ -29,6 +29,7 @@ const ExpedienteAdministracion = ({ idExpediente,visibleButton }) => {
 
         fetchData();
     }, []);
+
 
     return (
         <ul className={`py-2 ${visibleButton?'block':'hidden'}`}>

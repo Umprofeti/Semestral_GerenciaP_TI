@@ -98,9 +98,10 @@ const CarouselCitasProgramadas = () => {
                         </div>
                         <div className="md:w-2/6">
                             {!loading && result && (
-                                cita.Paciente.expediente&&
+                                
+                                cita.Paciente.id&&
                                 <ExpedienteAdministracion
-                                    idExpediente={cita.Paciente.expediente}
+                                    idPaciente={cita.Paciente.id}
                                     visibleButton={expedienteVisible === index} 
                                 />
                             )}
