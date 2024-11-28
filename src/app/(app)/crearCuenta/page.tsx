@@ -7,21 +7,21 @@ import Image from 'next/image'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Users } from '../../../collections/Users'
 import { postLocalAPI } from '../utils/localAPI'
+import { useRouter } from 'next/navigation'
 
 type Inputs = {
-  name: string;
-  lastName: string;
-  userId: string;
-  dateBirth: string;
-  address: string;
-  phoneNumber: string;
-  email: string;
-  password: string;
-  passwornConfirm: string;
-  edad: number;
-  gender: 'Hombre' | 'Mujer'; // Campo añadido para el género
-};
-
+  name: string
+  lastName: string
+  userId: string
+  dateBirth: string
+  address: string
+  phoneNumber: string
+  email: string
+  password: string
+  passwornConfirm: string
+  edad: number
+  gender: 'Hombre' | 'Mujer' // Campo añadido para el género
+}
 
 const CrearCuenta = () => {
   const {
@@ -30,6 +30,7 @@ const CrearCuenta = () => {
     formState: { errors },
   } = useForm<Inputs>()
 
+  const router = useRouter()
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     if (data.password === data.passwornConfirm) {
       const dataPaciente = {
@@ -127,7 +128,13 @@ const CrearCuenta = () => {
 
         <button className="my-2 rounded-md bg-blue-300 px-4 py-2 text-white">Crear Cuenta</button>
         <p className="text-sm text-gray-500">
-          ¿Ya tienes una cuenta? <span className="font-medium text-sky-300">Iniciar Sesión</span>
+          ¿Ya tienes una cuenta?{' '}
+          <span
+            onClick={() => router.push('/login')}
+            className="font-medium text-sky-300 hover:cursor-pointer"
+          >
+            Iniciar Sesión
+          </span>
         </p>
       </form>
       <div className="inferior-box absolute bottom-0 right-0 hidden h-20 w-20 bg-sky-200 lg:block" />

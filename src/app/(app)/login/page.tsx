@@ -14,9 +14,6 @@ type Inputs = {
 }
 
 const Login = () => {
-
-
-
   const {
     register,
     handleSubmit,
@@ -71,6 +68,11 @@ const Login = () => {
     }
   }
 
+  const onCrearCuenta = (e: Event) => {
+    e.preventDefault()
+    router.push('/crearCuenta')
+  }
+
   return (
     <div className="lg:justify-space-between flex h-screen flex-col items-center justify-around lg:flex-row">
       <div className="superior-box absolute top-0 h-20 w-full bg-[#89ccc5] lg:absolute lg:left-0 lg:top-0 lg:h-40 lg:w-40"></div>
@@ -98,7 +100,10 @@ const Login = () => {
 
         <p className="text-sm text-gray-500">¿Olvidaste tu contraseña?</p>
 
-        <button className="mt-5 rounded-xl bg-sky-300 px-8 py-2 text-lg text-white">
+        <button
+          onClick={onCrearCuenta}
+          className="mt-5 rounded-xl bg-sky-300 px-8 py-2 text-lg text-white"
+        >
           Crear Cuenta
         </button>
       </form>
