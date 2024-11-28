@@ -62,3 +62,23 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Establecer el color del scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #89ccc5;
+  border-radius: 50px;
+}
+
+/* Establecer el color de la barra de desplazamiento */
+::-webkit-scrollbar-thumb:hover {
+  background: #272727;
+}
