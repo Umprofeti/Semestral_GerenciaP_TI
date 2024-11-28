@@ -44,6 +44,12 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components:{
+      graphics:{
+        Logo: {path: './app/(payload)/components/Logo.tsx', exportName: 'Logo'},
+        Icon: {path: './app/(payload)/components/Icon.tsx', exportName: 'Icon'},
+      }
+    }
   },
 
   collections: [Users, Media, Especialidad, Doctores, Pacientes, Citas, Expedientes,Administracion],

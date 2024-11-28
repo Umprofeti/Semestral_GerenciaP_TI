@@ -1,0 +1,149 @@
+html {
+    &[data-theme=dark] {
+        --theme-elevation-0: rgb(39, 39, 39);  /* Color oscuro de fondo */
+        --theme-elevation-50: rgb(56, 56, 56);  /* Sombra sutil */
+        --theme-elevation-100: rgb(75, 75, 75);  /* Sombra ligera */
+        --theme-elevation-150: rgb(90, 90, 90);  /* Sombra más suave */
+        --theme-elevation-200: rgb(102, 102, 102); /* Base de color gris oscuro */
+        --theme-elevation-250: rgb(115, 115, 115);  /* Gris oscuro con un toque de azul */
+        --theme-elevation-300: rgb(130, 130, 130);  /* Gris frío */
+        --theme-elevation-350: rgb(145, 145, 145);  /* Gris medio con toque azul */
+        --theme-elevation-400: rgb(160, 160, 160);  /* Gris cálido */
+        --theme-elevation-450: rgb(175, 175, 175);  /* Gris más suave */
+        --theme-elevation-550: rgb(190, 190, 190);  /* Gris más claro */
+        --theme-elevation-600: rgb(200, 200, 200);  /* Claro, pero aún en el modo oscuro */
+        --theme-elevation-650: rgb(215, 215, 215);  /* Claro con un toque cálido */
+        --theme-elevation-700: rgb(230, 230, 230);  /* Suave y cálido */
+        --theme-elevation-750: rgb(245, 245, 245);  /* Ligeramente más brillante */
+        --theme-elevation-800: rgb(255, 255, 255);  /* Blanco para el texto o elementos principales */
+        --theme-elevation-850: rgb(255, 255, 255);  /* Blanco brillante */
+        --theme-elevation-900: rgb(255, 255, 255);  /* Blanco para acentos más brillantes */
+        --theme-elevation-950: rgb(255, 255, 255);  /* Blanco puro */
+        --theme-elevation-1000: rgb(255, 255, 255); /* Blanco */
+        
+        --theme-bg: rgb(39, 39, 39); /* Fondo oscuro */
+        
+        --accent-color-light: rgb(137, 204, 197); /* Color principal claro */
+        --accent-color-medium: rgb(215, 235, 233); /* Acento de contraste */
+        --accent-color-dark: rgb(240, 178, 174); /* Toque cálido */
+    }
+  }
+  
+  body, h2, h5 {
+    font-family: monospace;
+    font-weight: bold;
+  }
+  
+  .btn {
+    &--style-primary {
+      background-color: rgb(0, 213, 110);
+      color: var(--theme-elevation-900);
+    }
+  
+    &--style-primary.btn--disabled {
+      background-color: rgb(102, 255, 212);
+    }
+  
+    &--disabled {
+      background-color: rgb(102, 255, 212);
+    }
+  }
+  
+  .login .logo path {
+    fill: rgb(0, 213, 110);
+  }
+  
+  .template-default {
+    .nav {
+      &__brand .icon path {
+        fill: rgb(0, 213, 110);
+      }
+    }
+    
+    .before-dashboard {
+      .banner {
+        // BEM modifier selector (.banner--type-success)
+        &--type-success {
+          background: rgb(0, 213, 110);
+          color: white;
+        }
+  
+        // BEM element selector (.banner__content)
+        &__content svg {
+          background-color: #2A2544;
+        }
+      }
+    }
+  }
+
+  html {
+    &[data-theme=light] {
+      --theme-elevation-0: rgb(255, 255, 255);
+      --theme-elevation-50: rgb(242, 245, 245);
+      --theme-elevation-100: rgb(230, 235, 235);
+      --theme-elevation-150: rgb(217, 225, 225);
+      --theme-elevation-200: rgb(204, 215, 215);
+      --theme-elevation-250: rgb(191, 205, 205);
+      --theme-elevation-300: rgb(178, 195, 195);
+      --theme-elevation-350: rgb(165, 185, 185);
+      --theme-elevation-400: rgb(152, 175, 175);
+      --theme-elevation-450: rgb(139, 165, 165);
+      --theme-elevation-550: rgb(126, 155, 155);
+      --theme-elevation-600: rgb(113, 145, 145);
+      --theme-elevation-650: rgb(100, 135, 135);
+      --theme-elevation-700: rgb(87, 125, 125);
+      --theme-elevation-750: rgb(74, 115, 115);
+      --theme-elevation-800: rgb(61, 105, 105);
+      --theme-elevation-850: rgb(48, 95, 95);
+      --theme-elevation-900: rgb(35, 85, 85);
+      --theme-elevation-950: rgb(22, 75, 75);
+      --theme-elevation-1000: rgb(9, 65, 65);
+  
+      --theme-bg: rgb(255, 255, 255);
+    }
+  }
+  
+  body, h2, h5 {
+    font-family: monospace;
+    font-weight: bold;
+  }
+  
+  .btn {
+    &--style-primary {
+      background-color: rgb(0, 123, 213);
+      color: var(--theme-elevation-900);
+    }
+  
+    &--style-primary.btn--disabled {
+      background-color: rgb(102, 178, 255);
+    }
+  
+    &--disabled {
+      background-color: rgb(102, 178, 255);
+    }
+  }
+  
+  .login .logo path {
+    fill: rgb(0, 123, 213);
+  }
+  
+  .template-default {
+    .nav {
+      &__brand .icon path {
+        fill: rgb(0, 123, 213);
+      }
+    }
+    
+    .before-dashboard {
+      .banner {
+        &--type-success {
+          background: rgb(0, 123, 213);
+          color: white;
+        }
+  
+        &__content svg {
+          background-color: #2A2544;
+        }
+      }
+    }
+  }
