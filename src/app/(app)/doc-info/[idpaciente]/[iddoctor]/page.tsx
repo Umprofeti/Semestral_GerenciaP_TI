@@ -43,7 +43,7 @@ const DoctorInfo = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-y-4 p-4">
+    <div className="flex flex-col gap-y-4 p-4 md:pl-16 md:pr-16">
       <Header/>
       <DesktopNavigation/>
 

@@ -85,7 +85,7 @@ const BusquedaDoctor = () => {
                     value={busquedaInfo.nombreDoctor}
                     onChange={handleChange}
                     className="pl-10 w-full text-lg" />
-                <Button type="submit">Enviar</Button>
+                <Button className='ml-2 bg-[#f8f8f8] text-[#89ccc5]' type="submit">Enviar</Button>
             </form>
             <div className={`absolute top-12 w-full bg-[#89ccc5]  ${busquedaCard ? 'block' : 'hidden'}`}>
 

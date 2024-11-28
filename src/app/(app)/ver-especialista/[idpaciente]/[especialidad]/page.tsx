@@ -70,7 +70,7 @@ const Especialidades = () => {
   }
 
   return (
-    <div className="">
+    <div className="p-4 md:pl-16 md:pr-16">
       <Header />
       <DesktopNavigation />
       <div className="px-6">

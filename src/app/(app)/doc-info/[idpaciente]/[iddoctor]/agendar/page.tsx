@@ -38,7 +38,7 @@ const AddCita = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-y-4 bg-[#89ccc5] md:bg-white ">
+    <div className="flex flex-col gap-y-4 bg-[#89ccc5] md:bg-white p-4 md:pl-16 md:pr-16">
       <DesktopNavigation />
       <div className="flex flex-col gap-y-6 md:px-6 mt-12">
         <h1 className="text-2xl sm:text-3xl px-6">
