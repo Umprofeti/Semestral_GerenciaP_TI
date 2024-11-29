@@ -43,6 +43,6 @@ jobs:
         with:
           push: true
           file: Semestral_GerenciaP_TI/Dockerfile
-          tags: ${{ secrets.AZURE_CONTAINER_REGISTRY }}/webapp-gerencia:latest
+          tags: webapp-gerencia:latest
 
 
