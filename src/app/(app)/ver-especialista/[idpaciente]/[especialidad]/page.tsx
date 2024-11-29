@@ -93,7 +93,7 @@ const Especialidades = () => {
                       <Card className="md:h-96 w-full bg-red-500">
                         <CardContent className="flex md:flex-col items-center justify-center gap-2 bg-[#cce7e4] py-2 md:h-full">
                           <div className="w-2/5 md:w-full flex justify-center items-center bg-[#8ccac3] rounded-lg overflow-hidden h-28 max-h-28 md:h-56 md:max-h-56">
-                            <Image src={doctor.fotoDoctor.url} width={420} height={360} alt={doctor.fotoDoctor.alt} className="h-full w-full object-cover" />
+                            <img src={doctor.fotoDoctor.url} width={420} height={360} alt={doctor.fotoDoctor.alt} className="h-full w-full object-cover" />
                           </div>
                           <div className="w-3/5 md:w-full flex items-center md:items-start ">
                             <ul>
@@ -127,7 +127,7 @@ const Especialidades = () => {
                       <Card>
                         <CardContent className="flex md:flex-col items-center justify-center gap-2 bg-[#cce7e4] py-2 md:h-full">
                           <div className="w-2/5 md:w-full flex justify-center items-center bg-[#8ccac3] rounded-lg overflow-hidden h-28 max-h-28 md:h-56 md:max-h-56 ">
-                            <Image src={doctor.fotoDoctor.url} width={420} height={360} alt={doctor.fotoDoctor.alt} className="h-full w-full object-cover" />
+                            <img src={doctor.fotoDoctor.url} width={420} height={360} alt={doctor.fotoDoctor.alt} className="h-full w-full object-cover" />
                           </div>
                           <div className="w-3/5 md:w-full text-sm md:text-lg  flex items-center md:items-start md:mt-6">
                             <ul>
