@@ -47,7 +47,7 @@ RUN \
 # Etapa de construcción: crear la aplicación Next.js
 FROM base AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+COPY --from=base /app/node_modules ./node_modules
 COPY . .
 
 # Desactivar telemetría de Next.js durante el build si es necesario
