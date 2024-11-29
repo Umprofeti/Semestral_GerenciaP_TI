@@ -85,7 +85,7 @@ const CrearCuenta = () => {
     <div className="flex flex-col my-4 items-center justify-center bg-slate-50 p-0 lg:flex-row lg:justify-around">
       <div className="superior-box absolute left-0 top-0 hidden h-36 w-36 bg-sky-200 lg:block" />
       <div className='flex justify-center w-full'>
-        <Image src={Logo} alt="Logo" width={350} height={350} className="hidden lg:block md:mx-8" />
+        <img src={"/logo.svg"} alt="Logo" width={350} height={350} className="hidden lg:block md:mx-8" />
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col  md:mx-8 ">
           <h1 className="m-2 text-3xl font-semibold text-sky-300 my-8 md:my-2">
             {' '}

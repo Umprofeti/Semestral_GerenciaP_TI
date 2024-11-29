@@ -3,7 +3,7 @@
 import React from 'react'
 import './login.css'
 import '../crearCuenta/crearCuenta.css'
-import Logo from '../public/doctor.svg'
+// import Logo from '../../../logo.svg'
 import Image from 'next/image'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
@@ -73,7 +73,7 @@ const Login = () => {
     <div className="lg:justify-space-between flex h-screen flex-col items-center justify-around lg:flex-row">
       <div className="superior-box absolute top-0 h-20 w-full bg-[#89ccc5] lg:absolute lg:left-0 lg:top-0 lg:h-40 lg:w-40"></div>
 
-      <Image src={Logo} alt="Logo" width={250} height={250} className="mt-10" />
+      <img src={"/logo.svg"} alt="Logo" width={250} height={250} className="mt-10" />
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center">
         <h1 className="hidden text-3xl font-semibold lg:block">
