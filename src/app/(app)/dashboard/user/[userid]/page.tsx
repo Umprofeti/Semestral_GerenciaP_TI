@@ -55,7 +55,7 @@ export default async function Home({ params }: { params: { userid: string } }) {
 
 function CarouselMedicosDestacados({ doctors }: { doctors: any[] }) {
   const color = "bg-[#cce7e4]";
-
+  console.log(doctors)
   return (
     <div className="flex ">
       <Carousel className="w-full">
@@ -65,13 +65,15 @@ function CarouselMedicosDestacados({ doctors }: { doctors: any[] }) {
               <div className="p-1 flex flex-col gap-2">
                 <Card className={color}>
                 <CardContent className="p-2 flex aspect-square items-center justify-center overflow-hidden">
+                  {doctor.fotoDoctor.url&&
                   <Image
-                    src={doctor.fotoDoctor.url}
-                    alt={`Foto de ${doctor.nombreDoctor}`}
-                    width={1000}
-                    height={1000}
-                    className="object-cover w-full h-full rounded-2xl"
-                  />
+                  src={doctor.fotoDoctor.url}
+                  alt={`Foto de ${doctor.nombreDoctor}`}
+                  width={1000}
+                  height={1000}
+                  className="object-cover w-full h-full rounded-2xl"
+                />
+                }
                 </CardContent>
                 </Card>
                 <div className="flex flex-col justify-center items-center">
