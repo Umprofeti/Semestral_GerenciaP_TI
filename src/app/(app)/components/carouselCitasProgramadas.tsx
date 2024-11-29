@@ -53,12 +53,11 @@ const CarouselCitasProgramadas = () => {
                 });
 
                 if (!req.ok) {
-                    console.log('Error al iniciar sesion');
+                    console.log('Error al conseguir las citas');
                     return;
                 }
 
                 const res = await req.json();
-                console.log(res)
                 setResult(res);
                 setLoading(false);
             } catch (err: any) {
@@ -70,6 +69,28 @@ const CarouselCitasProgramadas = () => {
         fetchData();
     }, []);
 
+    const convertTime = (time: string): string => {
+        const dateExtract = time.split('T')[1];
+        const dataHMS = dateExtract.split('.')[0];
+    
+        // Crear un objeto Date basado en las horas, minutos y segundos
+        const [hours, minutes, seconds] = dataHMS.split(':').map(Number);
+        const date = new Date();
+        date.setHours(hours, minutes, seconds);
+    
+        // Opciones para el formato
+        const options: Intl.DateTimeFormatOptions = {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true // Para formato de 12 horas
+        };
+    
+        // Obtener el tiempo en formato local
+        const localTime = date.toLocaleTimeString('en-US', options);
+    
+        return localTime;
+    };
+    
 
     return (
         <div className="w-full text-sm">
@@ -80,7 +101,8 @@ const CarouselCitasProgramadas = () => {
                             <div className="md:w-2/6 py-4">
                                 <ul>
                                     <li>Nombre: {`${cita.Paciente.nombre} ${cita.Paciente.apellido}`} </li>
-                                    <li>Hora: {!loading && result && new Date(cita.Hora).toLocaleTimeString('es-PA')}</li>
+                                    {/* <li>Hora: {!loading && result && cita.Hora}</li> */}
+                                    <li>Hora: {!loading && result && convertTime(cita.Hora)}</li>
                                     <li>Fecha: {!loading && result && new Date(cita.Fecha).toLocaleDateString('es-ES')}</li>
                                 </ul>
                             </div>

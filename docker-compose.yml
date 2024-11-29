@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   payload:
-    image: node:latest
+    image: node:20.10-alpine
     ports:
       - '3000:3000'
     volumes:

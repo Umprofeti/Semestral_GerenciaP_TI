@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 
 const ExpedienteAdministracion = ({ idPaciente,visibleButton }) => {
-    console.log(idPaciente)
     const [result, setResult] = useState<InfoExpediente>();
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')

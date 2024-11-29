@@ -44,7 +44,6 @@ const ProfileUser = () => {
                 }
 
                 const res = await req.json()
-                console.log(res)
                 setResult(res)
                 setLoading(false)
             } catch (err: any) {

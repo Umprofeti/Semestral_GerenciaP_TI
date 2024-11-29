@@ -30,7 +30,6 @@ const Login = () => {
         },
         body: JSON.stringify(data),
       })
-      console.log(data)
       const reqDoctor = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/doctor/login`, {
         method: 'POST',
         headers: {
@@ -50,15 +49,12 @@ const Login = () => {
       if (reqPacientes.ok) {
         const res = await reqPacientes.json()
         router.push(`/dashboard/user/${res.user.id}`)
-        console.log(res)
       } else if (reqDoctor.ok) {
         const res = await reqDoctor.json()
         router.push(`/dashboard/doctor`)
-        console.log(res)
       } else if (reqUser.ok) {
         const res = await reqUser.json()
         router.push(`/dashboard/administracion/${res.user.id}`)
-        console.log(res)
       } else {
         console.log('Error al iniciar sesion')
         return

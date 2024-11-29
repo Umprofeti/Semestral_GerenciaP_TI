@@ -38,7 +38,6 @@ const DesktopNavigation = () => {
 
     }, []);
 
-    if(result){console.log('resultado cargados',result)}
 
     return (
         <div>

@@ -67,7 +67,6 @@ export default function FormCita() {
         if (verificarFecha(form.Fecha)) {
             try {
                 setSubiendoInfo(true);
-                console.log(form)
                 const responseEnvio = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/citas`, {
                     method: "POST",
                     headers: {

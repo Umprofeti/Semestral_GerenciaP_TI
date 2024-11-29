@@ -15,7 +15,6 @@ import { Paciente } from "@/payload-types";
 const CitasDelDia = async ({ params }: { params: { doctorid: string }}) => {
   // Obtener `doctorId`
   const { doctorid } = await params;
-  console.log(`doctorid: ${doctorid}`);
 
   const payload = await getPayload({ config: configPromise });
 
@@ -25,7 +24,6 @@ const CitasDelDia = async ({ params }: { params: { doctorid: string }}) => {
   });
   const doctores = dataDoctores.docs;
   const doctor = doctores.find((doc) => doc.id === doctorid);
-  console.log(doctor);
 
   // Obtener citas relacionadas al `doctorid`
   const citasData = await payload.find({
@@ -38,7 +36,6 @@ const CitasDelDia = async ({ params }: { params: { doctorid: string }}) => {
     depth: 2,
   });
   const citas = citasData.docs;
-  console.log(citas);
 
    // Obtener todos los expedientes
   const expedientes = await payload.find({
@@ -81,7 +78,6 @@ const CitasDelDia = async ({ params }: { params: { doctorid: string }}) => {
                   (expediente) => (expediente.paciente as Paciente).id === paciente.id
                 );
 
-                console.log(expediente)
 
                 return (
                   <TableRow key={cita.id}>

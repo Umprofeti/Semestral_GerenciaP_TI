@@ -19,7 +19,7 @@ const Saludo = () => {
                 });
 
                 if (!req.ok) {
-                    console.log('Error al iniciar sesion');
+                    console.log('Conseguir credenciales de las cookies');
                     return;
                 }
 

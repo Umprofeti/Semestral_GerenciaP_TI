@@ -20,7 +20,28 @@ const HistorialDeCitas = async ({ params }: { params: { slug: string } }) => {
     },
   });
 
-  console.log(data)
+  const convertTime = (time: string): string => {
+    const dateExtract = time.split('T')[1];
+    const dataHMS = dateExtract.split('.')[0];
+
+    // Crear un objeto Date basado en las horas, minutos y segundos
+    const [hours, minutes, seconds] = dataHMS.split(':').map(Number);
+    const date = new Date();
+    date.setHours(hours, minutes, seconds);
+
+    // Opciones para el formato
+    const options: Intl.DateTimeFormatOptions = {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true // Para formato de 12 horas
+    };
+
+    // Obtener el tiempo en formato local
+    const localTime = date.toLocaleTimeString('en-US', options);
+
+    return localTime;
+};
+
   return (
     <div>
       <div className="h-[10vh] bg-[#89ccc5] flex justify-center items-center md:hidden">
@@ -51,7 +72,7 @@ const HistorialDeCitas = async ({ params }: { params: { slug: string } }) => {
                         </div>
                         <div className="text-sm">
                           Fecha: {new Date(cita.Fecha).toLocaleDateString('es-ES')},
-                          Hora: {new Date(cita.Hora).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
+                          Hora: {convertTime(cita.Hora)}
                         </div>
                         <div className="flex justify-center mt-2">
                           <BotonCancelarCita idCita={cita.id} />

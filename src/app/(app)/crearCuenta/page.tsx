@@ -58,7 +58,6 @@ const CrearCuenta = () => {
           genero: data.genero,
           edad: age
         }
-        console.log(dataPaciente)
         postLocalAPI(dataPaciente)
         try {
           const req = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/pacientes`, {

@@ -34,7 +34,6 @@ const InfoPaciente: React.FC<InfoPacienteProps> = ({ infomacionExpe }) => {
                     },
                 });
                 const data = await req.json();
-                console.log('Data extraida', data)
                 setResult(data)
                 setLoading(false)
             } catch (err: any) {
@@ -88,7 +87,6 @@ const InfoPaciente: React.FC<InfoPacienteProps> = ({ infomacionExpe }) => {
                 }
 
                 const updatedData = await responseEnvio.json();
-                console.log('Expediente actualizado:', updatedData);
                 setIsEditing(false)
                 return updatedData;
             } catch (error) {
