@@ -18,6 +18,7 @@ import {cloudStoragePlugin  } from '@payloadcms/plugin-cloud-storage'
 import {nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import {resendAdapter } from '@payloadcms/email-resend'
 import { Administracion } from './collections/Administracion'
+import {azureStorage} from '@payloadcms/storage-azure'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -38,7 +39,9 @@ const minioAdapter = s3Adapter({
 })
 
 
+
 export default buildConfig({
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
   admin: {
     user: Users.slug,
     importMap: {
@@ -68,13 +71,18 @@ export default buildConfig({
     apiKey: process.env.RESEND_API_KEY,
   }),
   plugins: [
-    cloudStoragePlugin({
-    collections: {
-      'media':{
-        adapter: minioAdapter,
-      }
-    },
-    enabled: true
-  })
+    azureStorage({
+      collections: {
+        media: {
+          prefix: 'semestral-gerencia-proyectos',
+        },
+        
+      },
+      allowContainerCreate: process.env.AZURE_STORAGE_ALLOW_CONTAINER_CREATE === 'true',
+      baseURL: process.env.AZURE_STORAGE_ACCOUNT_BASEURL || '',
+      connectionString: process.env.AZURE_STORAGE_CONNECTION_STRING || '',
+      containerName: process.env.AZURE_STORAGE_CONTAINER_NAME || '',
+      enabled: true
+    })
   ],
 })
