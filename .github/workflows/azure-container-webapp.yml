@@ -35,8 +35,10 @@ jobs:
           echo "AZURE_STORAGE_ACCOUNT_BASEURL=${{ secrets.AZURE_STORAGE_ACCOUNT_BASEURL }}" >> .env
           echo "AZURE_STORAGE_CONNECTION_STRING=${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" >> .env
           
+ # 3. Build Docker Image from Dockerfile
       - name: Build Docker image
-        run: docker-compose -f docker-compose.yml build
+        run: |
+          docker build -t ${{ secrets.AZURE_CONTAINER_REGISTRY }}/semestralgerencia:latest .
 
       - name: Log in to Azure Container Registry
         uses: azure/docker-login@v1
@@ -45,6 +47,9 @@ jobs:
           username: ${{ secrets.AZURE_USERNAME }}
           password: ${{ secrets.AZURE_PASSWORD }}
 
+     
+      # 4. Push Docker Image to Azure Container Registry
       - name: Push Docker image
-        run: docker-compose -f docker-compose.yml push
+        run: |
+          docker push ${{ secrets.AZURE_CONTAINER_REGISTRY }}/semestralgerencia:latest
 
