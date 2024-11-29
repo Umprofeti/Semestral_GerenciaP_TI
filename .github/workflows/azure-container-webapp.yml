@@ -30,11 +30,6 @@ jobs:
           echo "AZURE_STORAGE_CONTAINER_NAME=${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}" >> .env
           echo "AZURE_STORAGE_ACCOUNT_BASEURL=${{ secrets.AZURE_STORAGE_ACCOUNT_BASEURL }}" >> .env
           echo "AZURE_STORAGE_CONNECTION_STRING=${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" >> .env
-          
- # 3. Build Docker Image from Dockerfile
-      - name: Build Docker image
-        run: |
-          docker build -t ${{ secrets.AZURE_CONTAINER_REGISTRY }}/webapp-gerencia:latest .
 
       - name: 'Docker Login'
         uses: azure/docker-login@v1
