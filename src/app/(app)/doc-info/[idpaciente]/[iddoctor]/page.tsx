@@ -69,7 +69,7 @@ const DoctorInfo = () => {
                       <div className="text-lg text-[#3f3c3c] md:text-2xl">{doctor.especialidad.Nombre}</div>
                     </div>
                     <div className="w-1/2 max-h-48 md:max-h-72 overflow-hidden rounded-lg">
-                      <Image
+                      <img
                       src={doctor.fotoDoctor.url}
                       alt={doctor.fotoDoctor.alt}
                         width={150}  
