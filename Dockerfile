@@ -1,15 +1,11 @@
-# From https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
-
+# Usar una imagen base con Node.js (alpine para ser más liviano)
 FROM node:18-alpine AS base
 
-# Install dependencies only when needed
-FROM base AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+# Instalar dependencias básicas necesarias
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-#Set env variables
-# Definir variables de entorno
+# Definir ARGs para recibir variables de entorno durante la construcción
 ARG DATABASE_URI
 ARG PAYLOAD_SECRET
 ARG MINIO_ENDPOINT
@@ -24,7 +20,7 @@ ARG AZURE_STORAGE_CONTAINER_NAME
 ARG AZURE_STORAGE_ACCOUNT_BASEURL
 ARG AZURE_STORAGE_CONNECTION_STRING
 
-# Establecer variables de entorno dentro del contenedor
+# Establecer estas variables como ENV dentro del contenedor
 ENV DATABASE_URI=${DATABASE_URI}
 ENV PAYLOAD_SECRET=${PAYLOAD_SECRET}
 ENV MINIO_ENDPOINT=${MINIO_ENDPOINT}
@@ -39,8 +35,7 @@ ENV AZURE_STORAGE_CONTAINER_NAME=${AZURE_STORAGE_CONTAINER_NAME}
 ENV AZURE_STORAGE_ACCOUNT_BASEURL=${AZURE_STORAGE_ACCOUNT_BASEURL}
 ENV AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}
 
-
-# Install dependencies based on the preferred package manager
+# Instalar dependencias de acuerdo al lockfile
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
@@ -49,16 +44,13 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-
-# Rebuild the source code only when needed
+# Etapa de construcción: crear la aplicación Next.js
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
+# Desactivar telemetría de Next.js durante el build si es necesario
 # ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN \
@@ -68,30 +60,32 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-# Production image, copy all the files and run next
-FROM base AS runner
+# Etapa final: imagen de producción
+FROM node:18-alpine AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
-# Uncomment the following line in case you want to disable telemetry during runtime.
+ENV NODE_ENV=production
+# Desactivar telemetría en tiempo de ejecución si es necesario
 # ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
+# Copiar los archivos necesarios para ejecutar la aplicación
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
+# Asegurar permisos correctos
+RUN chown -R nextjs:nodejs /app
 
-
+# Cambiar al usuario creado
 USER nextjs
 
+# Exponer el puerto de la aplicación
 EXPOSE 3000
+ENV PORT=3000
 
-ENV PORT 3000
-
-# server.js is created by next build from the standalone output
-# https://nextjs.org/docs/pages/api-reference/next-config-js/output
-CMD HOSTNAME="0.0.0.0" npm run start
+# Iniciar la aplicación
+CMD ["npm", "run", "start"]
