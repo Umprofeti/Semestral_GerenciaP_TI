@@ -41,11 +41,11 @@ jobs:
     # 4. Build the Docker image
       - name: Build Docker image
         run: |
-          docker build -t webapp-gerencia:latest .
+          docker build -t semestralgerencia.azurecr.io/webapp-gerencia:latest .
 
       # 5. Push the Docker image to Azure Container Registry
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.AZURE_CONTAINER_REGISTRY }}/webapp-gerencia:latest
+          docker push semestralgerencia.azurecr.io/webapp-gerencia:latest
 
 
