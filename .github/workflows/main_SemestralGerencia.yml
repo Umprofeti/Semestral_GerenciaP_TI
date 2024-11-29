@@ -1,0 +1,51 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy container app to Azure Web App - SemestralGerencia
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: 'ubuntu-latest'
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Log in to registry
+      uses: docker/login-action@v2
+      with:
+        registry: https://semestralgerencia.azurecr.io/
+        username: ${{ secrets.AzureAppService_ContainerUsername_419ea581bb434e949763618ace5b79a5 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_5f314635b0474393a9ef8ea2326013fb }}
+
+    - name: Build and push container image to registry
+      uses: docker/build-push-action@v3
+      with:
+        push: true
+        tags: semestralgerencia.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_419ea581bb434e949763618ace5b79a5 }}/webapp-gerencia:${{ github.sha }}
+        file: ./Dockerfile
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Deploy to Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'SemestralGerencia'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_322c50205dde423280099397c73a06ea }}
+        images: 'semestralgerencia.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_419ea581bb434e949763618ace5b79a5 }}/webapp-gerencia:${{ github.sha }}'
