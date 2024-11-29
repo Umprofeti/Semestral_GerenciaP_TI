@@ -46,6 +46,6 @@ jobs:
       # 5. Push the Docker image to Azure Container Registry
       - name: Push Docker image
         run: |
-          docker push webapp-gerencia:latest
+          docker push ${{ secrets.AZURE_CONTAINER_REGISTRY }}/webapp-gerencia:latest
 
 
