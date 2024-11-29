@@ -19,7 +19,22 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y docker-compose
-
+      - name: Set up environment file
+        run: |
+          echo "DATABASE_URI=${{ secrets.DATABASE_URI }}" >> .env
+          echo "PAYLOAD_SECRET=${{ secrets.PAYLOAD_SECRET }}" >> .env
+          echo "MINIO_ENDPOINT=${{ secrets.MINIO_ENDPOINT }}" >> .env
+          echo "MINIO_ACCESS_KEY=${{ secrets.MINIO_ACCESS_KEY }}" >> .env
+          echo "MINIO_SECRET_KEY=${{ secrets.MINIO_SECRET_KEY }}" >> .env
+          echo "MINIO_REGION=${{ secrets.MINIO_REGION }}" >> .env
+          echo "MINIO_BUCKET=${{ secrets.MINIO_BUCKET }}" >> .env
+          echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}" >> .env
+          echo "PAYLOAD_PUBLIC_SERVER_URL=${{ secrets.PAYLOAD_PUBLIC_SERVER_URL }}" >> .env
+          echo "AZURE_STORAGE_ALLOW_CONTAINER_CREATE=${{ secrets.AZURE_STORAGE_ALLOW_CONTAINER_CREATE }}" >> .env
+          echo "AZURE_STORAGE_CONTAINER_NAME=${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}" >> .env
+          echo "AZURE_STORAGE_ACCOUNT_BASEURL=${{ secrets.AZURE_STORAGE_ACCOUNT_BASEURL }}" >> .env
+          echo "AZURE_STORAGE_CONNECTION_STRING=${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" >> .env
+          
       - name: Build Docker image
         run: docker-compose -f docker-compose.yml build
 
