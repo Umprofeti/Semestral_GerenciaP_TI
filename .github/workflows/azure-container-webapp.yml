@@ -38,11 +38,14 @@ jobs:
           username: ${{ secrets.AZURE_USERNAME }}
           password: ${{ secrets.AZURE_PASSWORD }}
 
-      - name: Log in to Azure Container Registry
-        uses: docker/build-push-action@v5
-        with:
-          push: true
-          file: Dockerfile
-          tags: webapp-gerencia:latest
+    # 4. Build the Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.AZURE_CONTAINER_REGISTRY }}/webapp-gerencia:latest .
+
+      # 5. Push the Docker image to Azure Container Registry
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.AZURE_CONTAINER_REGISTRY }}/webapp-gerencia:latest
 
 
