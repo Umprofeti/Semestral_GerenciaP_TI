@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import BotonCerrarSession from "./botonCerrarSesion";
 
 type UserAdmin ={
     user:{
@@ -76,7 +77,11 @@ const HeaderAdministracion = () => {
                 <div>
                     {currentTime ? currentTime.toLocaleDateString() : ""}
                 </div>
+                <div className="mt-2 flex justify-end">
+                    <BotonCerrarSession/>
+                </div>
             </div>
+            
         </div>
     );
 };

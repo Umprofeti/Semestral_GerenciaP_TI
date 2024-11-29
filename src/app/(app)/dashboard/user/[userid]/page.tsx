@@ -14,6 +14,7 @@ import MobileNavigation from "@/app/(app)/components/mobileNavigation";
 import { getPayload } from "payload";
 import configPromise from '@payload-config';
 import Saludo from "@/app/(app)/components/saludo";
+import BusquedaDoctor from "@/app/(app)/components/busquedaDoctor";
 
 export default async function Home({ params }: { params: { userid: string } }) {
   const { userid } = await params;
@@ -35,10 +36,7 @@ export default async function Home({ params }: { params: { userid: string } }) {
       <Saludo/>
 
       {/* Mobile-only Search Bar */}
-      <div className="relative md:hidden">
-        <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-        <Input placeholder="Search" className="pl-8" />
-      </div>
+      <BusquedaDoctor/>
 
       <div>
         <h2 className="m-3 text-xl md:text-2xl">Especialidades</h2>
@@ -55,7 +53,6 @@ export default async function Home({ params }: { params: { userid: string } }) {
 
 function CarouselMedicosDestacados({ doctors }: { doctors: any[] }) {
   const color = "bg-[#cce7e4]";
-  console.log(doctors)
   return (
     <div className="flex ">
       <Carousel className="w-full">

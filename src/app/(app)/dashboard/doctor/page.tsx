@@ -12,6 +12,7 @@ import {
 } from "@/app/(app)/components/ui/dialog";
 import { Button } from "@/app/(app)/components/ui/button";
 import { Paciente } from "@/payload-types";
+import BotonCerrarSession from "../../components/botonCerrarSesion";
 
 const CitasDelDia = () => {
   const [doctorData, setDoctorData] = useState<any>(null);
@@ -90,10 +91,15 @@ const CitasDelDia = () => {
 
   return (
     <div className="p-4 lg:pl-16 lg:pr-16 flex flex-col gap-4">
-      <h1 className="text-xl font-medium md:text-3xl">
-        Bienvenido,{" "}
-        <span className="text-[#89ccc5] block sm:inline">{doctorData?.nombreDoctor}</span>
-      </h1>
+      <div className="flex justify-between">
+        <h1 className="text-xl font-medium md:text-3xl">
+          Bienvenido,{" "}
+          <span className="text-[#89ccc5] block sm:inline">{doctorData?.nombreDoctor}</span>
+        </h1>
+        <div>
+          <BotonCerrarSession/>
+        </div>
+      </div>
       <div>
         <h2 className="text-lg font-medium md:text-xl">Citas del día</h2>
         {citas.length > 0 ? (
