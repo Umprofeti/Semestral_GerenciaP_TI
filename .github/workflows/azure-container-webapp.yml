@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          file: Semestral_GerenciaP_TI/Dockerfile
+          file: Dockerfile
           tags: webapp-gerencia:latest
 
 
