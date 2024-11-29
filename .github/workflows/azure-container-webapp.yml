@@ -48,8 +48,3 @@ jobs:
       - name: Push Docker image
         run: docker-compose -f docker-compose.yml push
 
-      - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
