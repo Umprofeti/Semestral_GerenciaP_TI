@@ -42,10 +42,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          login-server: ${{ secrets.AZURE_CONTAINER_REGISTRY }}
-          username: ${{ secrets.AZURE_USERNAME }}
-          password: ${{ secrets.AZURE_PASSWORD }}
           file: Semestral_GerenciaP_TI/Dockerfile
-          tags: ${{ secrets.AZURE_CONTAINER_REGISTRY }}/webapp-gerencia:${{ github.sha }}
+          tags: ${{ secrets.AZURE_CONTAINER_REGISTRY }}/webapp-gerencia:latest
 
 
