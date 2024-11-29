@@ -62,18 +62,16 @@ const ProfUser = () => {
                             <li>Dirección: {result?.docs[0].direccion}</li>
                         </ul>
                     </div>
-                        <InfoPaciente infomacionExpe={slug} />
-                    
+                    <InfoPaciente infomacionExpe={slug} />
+
                 </div>
             </div>
             <div className="w-full flex-grow bg-white md:bg-[#89ccc5] rounded-t-3xl relative">
                 <div className="relative">
                     <div className="absolute flex bg-white justify-center w-48 md:w-64 h-48 md:h-64 overflow-hidden -top-28 md:-top-36 left-1/2 md:left-20 transform -translate-x-1/2 md:-translate-x-0 border-white md:border-[#89ccc5] border-8 rounded-full z-10">
-                        {!loading &&
-                            result?.docs[0].fotoPaciente ?
-                            <InfoFotoPaciente foto={result?.docs[0].fotoPaciente.url} defaultIcon={false}/>
-                            :
-                            <InfoFotoPaciente foto={<UserCircle/>} defaultIcon={true} />
+                        {!loading && result?.docs[0].fotoPaciente &&
+                            (<InfoFotoPaciente foto={result?.docs[0].fotoPaciente.url} idPerfil={slug}/>)
+
                         }
                     </div>
                 </div>
@@ -91,8 +89,8 @@ const ProfUser = () => {
                             <li>Dirección: {result?.docs[0].direccion}</li>
                         </ul>
                     </div>
-                        <InfoPaciente infomacionExpe={slug} />
-                    
+                    <InfoPaciente infomacionExpe={slug} />
+
                 </div>
             </div>
             <MobileNavigation />

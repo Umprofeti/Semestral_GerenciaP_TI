@@ -71,6 +71,7 @@ export const Pacientes: CollectionConfig = {
             label: 'Foto del paciente',
             relationTo: 'media',
             required: false,
+            defaultValue:'6749dfe59b0496bb0a6e98d9'
         },
     ],
     hooks: {
@@ -89,7 +90,11 @@ export const Pacientes: CollectionConfig = {
                         overrideAccess: true,
                     });
                 }
+                
+                
             },
+            
+
         ],
     },
 };
